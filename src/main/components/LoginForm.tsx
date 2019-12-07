@@ -39,7 +39,7 @@ const useLoginFormStyles = defineStyles(theme => {
   return {
     root: {
       width: '300px',
-      border: '1px solid #aaa',
+      border: '1px solid #f4f4f4',
       padding: '2rem 4rem'
     },
 
@@ -73,18 +73,17 @@ function LoginFormView({
         <Label1>Login</Label1>
 
         <div className={classes.fieldsContainer}>
-          <label className={classes.fieldWrapper}>
-            <span>Username</span>
-            <Input size={SIZE.compact}/>
-          </label>
+            <FormControl
+              label={() => "Username"}
+            >
+              <Input size={SIZE.compact}/>
+            </FormControl>
 
-          <label className={classes.fieldWrapper}>
             <FormControl
               label={() => "Password"}
             >
               <Input type="password" size={SIZE.compact}/>
             </FormControl>
-          </label>
         </div>
 
         <div className={classes.loginButtonWrapper}>

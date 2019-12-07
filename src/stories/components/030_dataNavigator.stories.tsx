@@ -1,12 +1,14 @@
 import React from 'react'
-import { DataExplorer } from '../js-cockpit'
+import { App, DataExplorer } from '../js-cockpit'
 
 export default {
   title: 'Data driven components'
 }
 
 export const woohoo = () => (
-  <DataExplorer
+  <App>
+    <DataExplorer
 
-  />
+    />
+  </App>
 )

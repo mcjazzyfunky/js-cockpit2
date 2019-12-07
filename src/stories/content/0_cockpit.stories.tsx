@@ -1,5 +1,5 @@
 import React from 'react'
-import { App, Cockpit } from '../js-cockpit'
+import { App, Brand, Cockpit, LogoutButton } from '../js-cockpit'
 
 export default {
   title: 'Cockpit'
@@ -8,10 +8,9 @@ export default {
 export const cockpit = () => 
   <App>
     <Cockpit
-      slotBrand="Brand"
+      slotBrand={<Brand vendor="meet&amp;greet" title="Back Office"/>}
       slotTopNav="TopNav"
-      slotActionArea="ActionArea"
-      slotMenu="Menu"
+      slotActionArea={<LogoutButton/>}
       slotSidebar="Sidebar"
       slotCenter="Center"
     />

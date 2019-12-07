@@ -25,6 +25,8 @@ type CockpitProps = {
   slotCenter?: ReactNode
 }
 
+type Classes = ReturnType<typeof useCockpitStyles>
+
 // --- validation ----------------------------------------------------
 
 const validateCockpitProps = Spec.checkProps({
@@ -34,13 +36,13 @@ const validateCockpitProps = Spec.checkProps({
     slotActionArea: isNode,
     slotMenu: isNode,
     slotSidebar: isNode,
-    slotCenter: isNode
+    slotCenter: isNode,
   }
 })
 
 // --- styles --------------------------------------------------------
 
-const useCockpitStyles = defineStyles((theme: any) => { // TODO
+const useCockpitStyles = defineStyles(theme => {
   return {
     root: {
       display: 'flex',
@@ -53,11 +55,10 @@ const useCockpitStyles = defineStyles((theme: any) => { // TODO
     },
 
     header: {
-      border: '1px solid red',
+      color: theme.colors.white,
       display: 'flex',
       flexDirection: 'row'
     },
-
     brand: {
     },
 
@@ -120,7 +121,7 @@ function renderHeader(
   slotBrand: ReactNode,
   slotTopNav: ReactNode,
   slotActionArea: ReactNode,
-  classes: any // TODO
+  classes: Classes
 ) {
   if (!slotBrand && !slotTopNav && !slotActionArea) {
     return null
@@ -144,7 +145,7 @@ function renderHeader(
   )
 }
 
-function renderMenu(slotMenu: ReactNode, classes: any) {
+function renderMenu(slotMenu: ReactNode, classes: Classes) {
   if (!slotMenu) {
     return null
   }
@@ -156,7 +157,7 @@ function renderMenu(slotMenu: ReactNode, classes: any) {
   )
 }
 
-function renderBody(slotSidebar: ReactNode, slotCenter: ReactNode, classes: any) {
+function renderBody(slotSidebar: ReactNode, slotCenter: ReactNode, classes: Classes) {
   if (!slotSidebar && !slotCenter) {
     return null
   }
@@ -164,7 +165,7 @@ function renderBody(slotSidebar: ReactNode, slotCenter: ReactNode, classes: any)
   const
     col1 = !slotSidebar
       ? null
-      : <div className={classes.sideBar}>{slotSidebar}</div>,
+      : <div className={classes.sidebar}>{slotSidebar}</div>,
     
     col2 = !slotCenter
       ? null

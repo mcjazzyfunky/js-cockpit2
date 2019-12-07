@@ -10,7 +10,11 @@ import defineStyles from '../styling/tools/defineStyles'
 
 const Cockpit = component<CockpitProps>({
   displayName: 'Cockpit',
-  validate: Spec.lazy(() => validateCockpitProps),
+  
+  ...process.env.NODE_ENV === 'development' as any
+    ? { validate: Spec.lazy(() => validateCockpitProps) }
+    : null,
+ 
   render: CockpitView
 })
 
@@ -60,21 +64,24 @@ const useCockpitStyles = defineStyles(theme => {
       flexDirection: 'row'
     },
     brand: {
+      display: 'flex'
     },
 
     topNav: {
+      display: 'flex',
       flexGrow: 1
     },
 
     actionArea: {
+      display: 'flex'
     },
 
     menu: {
+      display: 'flex'
     },
 
     body: {
       display: 'flex',
-      flexDirection: 'row',
       flexGrow: 1,
       height: '100%'
     },

@@ -3,11 +3,18 @@ import React, { ReactNode } from 'react'
 import { component, isNode } from 'js-react-utils'
 import * as Spec from 'js-spec/validators'
 
+// internal import
+import defineStyles from '../styling/tools/defineStyles'
+
 // --- components ----------------------------------------------------
 
 const Brand = component<BrandProps>({
   displayName: 'Brand',
-  validate: Spec.lazy(() => validateBrandProps),
+  
+  ...process.env.NODE_ENV === 'development' as any
+    ? { validate: Spec.lazy(() => validateBrandProps) }
+    : null,
+ 
   render: BrandView
 })
 
@@ -27,6 +34,12 @@ const validateBrandProps = Spec.checkProps({
     title: Spec.string,
     logo: isNode
   }
+})
+
+// --- styles --------------------------------------------------------
+
+const useBrandStyles = defineStyles(theme => {
+  return {}
 })
 
 // --- view ----------------------------------------------------------

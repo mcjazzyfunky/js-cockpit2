@@ -10,7 +10,11 @@ import {LightTheme, BaseProvider, styled} from 'baseui'
 
 const App = component<AppProps>({
   displayName: 'App',
-  validate: Spec.lazy(() => validateAppProps),
+  
+  ...process.env.NODE_ENV === 'development' as any
+    ? { validate: Spec.lazy(() => validateAppProps) }
+    : null,
+ 
   render: AppView
 })
 

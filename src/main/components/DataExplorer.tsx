@@ -12,7 +12,12 @@ const { useCallback, useEffect, useState } = React
 
 const DataExplorer = component<DataExplorerProps>({
   displayName: 'DataExplorer',
-  render: DataExplorerView
+  
+  ...process.env.NODE_ENV === 'development' as any
+    ? { validate: Spec.lazy(() => validateDataExplorerProps) }
+    : null,
+  
+    render: DataExplorerView
 })
 
 // --- views ---------------------------------------------------------

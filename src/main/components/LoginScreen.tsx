@@ -6,6 +6,7 @@ import * as Spec from 'js-spec/validators'
 // internal import
 import Text from './Text'
 import defineStyles from '../styling/tools/defineStyles'
+//import LoginGraphic from 'react-svg-loader!../illustrations/login.svg'
 
 // --- components ----------------------------------------------------
 
@@ -55,9 +56,10 @@ const useLoginScreenStyles = defineStyles(theme => {
       display: 'flex',
       alignItems: 'center',
       padding: '0 32px',
-      height: '44px',
-      maxHeight: '44px',
-      boxShadow: theme.lighting.shadow600
+      height: '52px',
+      maxHeight: '52px',
+      overflow: 'hidden',
+      boxShadow: theme.lighting.shadow500
     },
 
     body: {
@@ -73,7 +75,7 @@ const useLoginScreenStyles = defineStyles(theme => {
       padding: '0 32px',
       height: '44px',
       maxHeight: '44px',
-      boxShadow: theme.lighting.shadow600
+      boxShadow: theme.lighting.shadow500
     }
   }
 })

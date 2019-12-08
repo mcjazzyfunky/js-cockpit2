@@ -123,7 +123,7 @@ const useSideNavStyles = defineStyles(theme => {
     groupTitleLevel0: {
       fontSize: theme.typography.font350.fontSize + ' !important',
       paddingLeft: '20px',
-      margin: '5px 0'
+      margin: '5px 0',
     },
     
     groupTitleLevel1: {

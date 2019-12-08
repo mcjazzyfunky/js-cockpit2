@@ -38,16 +38,43 @@ export const cockpit = () =>
                 items: [
                   {
                     type: 'item',
-                    title: 'Item-1-1',
+                    title: 'Manage products',
                     itemId: '1'
                   },
                   {
                     type: 'item',
-                    title: 'Item-1-2',
+                    title: 'Price calculation',
                     itemId: '123'
+                  },
+                  {
+                    type: 'item',
+                    title: 'Import products',
+                    itemId: '3'
+                  },
+                  {
+                    type: 'item',
+                    title: 'Export products',
+                    itemId: '3'
                   }
                 ]
               },
+              {
+                type: 'group',
+                title: 'Articles',
+                items: [
+                  {
+                    type: 'item',
+                    title: 'Assign articles to products',
+                    itemId: '1',
+                  },
+                  {
+                    type: 'item',
+                    title: 'Export articles',
+                    itemId: '2'
+                  }
+                ]
+              },
+              /*
               {
                 type: 'group',
                 title: 'Articles',
@@ -85,19 +112,24 @@ export const cockpit = () =>
                     ]
                   }
                 ]
-              },
+              }*/
               {
                 type: 'group',
                 title: 'Categories',
                 items: [
                   {
                     type: 'item',
-                    title: 'Item-1-1',
+                    title: 'Manage categories',
                     itemId: '1'
                   },
                   {
                     type: 'item',
-                    title: 'Item-1-2',
+                    title: 'Import categories',
+                    itemId: '1'
+                  },
+                  {
+                    type: 'item',
+                    title: 'Export categories',
                     itemId: '2'
                   }
                 ]

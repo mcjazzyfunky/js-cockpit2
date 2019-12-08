@@ -30,10 +30,65 @@ export const cockpit = () =>
         <SideNav
           menu={{
             type: 'groups',
+            activeItemId: '123',
             groups: [
               {
                 type: 'group',
-                title: 'Group-1',
+                title: 'Products',
+                items: [
+                  {
+                    type: 'item',
+                    title: 'Item-1-1',
+                    itemId: '1'
+                  },
+                  {
+                    type: 'item',
+                    title: 'Item-1-2',
+                    itemId: '123'
+                  }
+                ]
+              },
+              {
+                type: 'group',
+                title: 'Articles',
+                items: [
+                  {
+                    type: 'group',
+                    title: 'Variants',
+                    items: [
+                      {
+                        type: 'item',
+                        title: 'Item-2-1',
+                        itemId: '1',
+                      },
+                      {
+                        type: 'item',
+                        title: 'Item-2-1',
+                        itemId: '2'
+                      }
+                    ]
+                  },
+                  {
+                    type: 'group',
+                    title: 'Services',
+                    items: [
+                      {
+                        type: 'item',
+                        title: 'Item-2-1',
+                        itemId: '1'
+                      },
+                      {
+                        type: 'item',
+                        title: 'Item-2-1',
+                        itemId: '2'
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                type: 'group',
+                title: 'Categories',
                 items: [
                   {
                     type: 'item',
@@ -47,44 +102,6 @@ export const cockpit = () =>
                   }
                 ]
               },
-              {
-                type: 'group',
-                title: 'Group-2',
-                items: [
-                  {
-                    type: 'group',
-                    title: 'Group-2',
-                    items: [
-                      {
-                        type: 'item',
-                        title: 'Item-2-1',
-                        itemId: '1'
-                      },
-                      {
-                        type: 'item',
-                        title: 'Item-2-1',
-                        itemId: '2'
-                      }
-                    ]
-                  },
-                  {
-                    type: 'group',
-                    title: 'Group-2',
-                    items: [
-                      {
-                        type: 'item',
-                        title: 'Item-2-1',
-                        itemId: '1'
-                      },
-                      {
-                        type: 'item',
-                        title: 'Item-2-1',
-                        itemId: '2'
-                      }
-                    ]
-                  }
-                ]
-              }
             ]
           }}
         />

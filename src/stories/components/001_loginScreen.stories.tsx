@@ -1,5 +1,5 @@
 import React from 'react'
-import { App, Brand, LoginForm, LoginScreen, Text } from '../js-cockpit'
+import { App, Brand, LoginScreen, Text } from '../js-cockpit'
 
 export default {
   title: 'Login screen'
@@ -12,11 +12,14 @@ export const loginScreen = () =>
         <Brand
           vendor="meet&amp;greet"
           title="Back Office"
-          multicolor={true}
-          size="large"
+          size="medium"
         />}
 
       slotFooter={<Text>&copy; 2019, meet+greet</Text>}
-      slotLoginForm={<LoginForm/>}
+
+      loginFields={[
+        { type: 'text', name: 'username', label: 'Username' },
+        { type: 'password', name: 'password', label: 'Password' }
+      ]}
     />
   </App>

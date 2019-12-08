@@ -26,7 +26,7 @@ type BrandProps = {
   vendor?: string,
   title?: string,
   logo?: ReactNode,
-  size?: 'small' | 'medium' | 'large',
+  size?: 'small' | 'medium' | 'large' | 'huge',
   multicolor?: boolean
 }
 
@@ -37,7 +37,7 @@ const validateBrandProps = Spec.checkProps({
     vendor: Spec.string,
     title: Spec.string,
     logo: isNode,
-    size: Spec.oneOf('small', 'medium', 'large'),
+    size: Spec.oneOf('small', 'medium', 'large', 'huge'),
     multicolor: Spec.boolean
   }
 })
@@ -48,7 +48,8 @@ const useBrandStyles = defineStyles(theme => {
   return {
     root: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      fontSize: '18px'
     },
 
     column1: {
@@ -64,9 +65,9 @@ const useBrandStyles = defineStyles(theme => {
     },
 
     defaultLogo: {
-      width: '26px',
-      height: '26px',
-      paddingTop: '5px' // TODO
+      width: '1.6em',
+      height: '1.6em',
+      padding: '0.75em 0 0 0' // TODO
     },
 
     logoMulticolor: {
@@ -75,21 +76,27 @@ const useBrandStyles = defineStyles(theme => {
 
     vendor: {
       ...theme.typography.font200,
-      fontSize: '14px',
-      lineHeight: '15px'
+      fontSize: '90%',
     },
   
     title: {
       ...theme.typography.font200,
-      fontSize: '18px'
+      fontSize: '125%'
+    },
+
+    scaleMedium: {
     },
 
     scaleSmall: {
-
+      transform: 'scale(.9, .9)'
     },
 
     scaleLarge: {
+      transform: 'scale(1.1, 1.1)'
+    },
 
+    scaleHuge: {
+      transform: 'scale(1.2, 1.2)'
     }
   }
 })
@@ -100,6 +107,7 @@ function BrandView({
   vendor,
   title,
   logo,
+  size,
   multicolor = false
 }: BrandProps) {
   const classes = useBrandStyles()
@@ -121,9 +129,16 @@ function BrandView({
       {title ? <div className={classes.title}>{title}</div> : null}
     </div>
 
+  const sizeClass = size === 'small'
+    ? classes.scaleSmall
+    : size === 'large'
+    ? classes.scaleLarge
+    : size === 'huge'
+    ? classes.scaleHuge
+    : classes.scaleMedium
 
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${sizeClass}`}>
       {column1}
       {column2}
     </div>

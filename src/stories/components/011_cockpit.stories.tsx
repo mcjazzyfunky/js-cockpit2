@@ -1,8 +1,8 @@
 import React from 'react'
-import { App, WorkspaceSelector, Brand, Cockpit, LogoutButton, SideNav, UserMenu } from '../js-cockpit'
+import { App, WorkspaceSelector, Brand, Cockpit, DataExplorer, LogoutButton, SideNav, UserMenu } from '../js-cockpit'
 
 export default {
-  title: 'Cockpit-2'
+  title: 'Cockpit'
 }
 
 export const cockpit = () => 
@@ -106,6 +106,13 @@ export const cockpit = () =>
           }}
         />
       }
-      slotCenter="Center"
+      slotCenter={
+        dataExplorer
+      }
     />
   </App>
+
+const dataExplorer =
+  <DataExplorer
+    title="Back-office users"
+  />

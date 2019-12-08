@@ -3,11 +3,15 @@ import React from 'react'
 import { component } from 'js-react-utils'
 import * as Spec from 'js-spec/validators'
 import { Button, KIND } from 'baseui/button'
+import { ButtonGroup } from 'baseui/button-group'
 import { Input, SIZE } from 'baseui/input'
 import { Select } from 'baseui/select'
 import { LabelSmall, Label3 } from 'baseui/typography'
-import { ChevronLeft as FirstPageIcon } from 'baseui/icon'
-import { ArrowLeft as PreviousPageIcon } from 'baseui/icon'
+
+import { GoPlus as NewIcon } from 'react-icons/go'
+import { FiEdit as EditIcon } from 'react-icons/fi'
+import { FiTrash as DeleteIcon } from 'react-icons/fi'
+import { MdFileDownload as DownloadIcon } from 'react-icons/md'
 
 import {
   StyledTable,
@@ -17,6 +21,7 @@ import {
 
 // internal imports
 import defineStyles from '../styling/tools/defineStyles'
+import Text from './Text'
 
 // derived imports
 const { useCallback, useEffect, useState } = React
@@ -60,14 +65,19 @@ const useDataExplorerStyles = defineStyles(theme => {
     root: {
       display: 'flex',
       flexDirection: 'column',
-      width: '100%',
       height: '300px',
-      margin: '4px 6px',
-      ...theme.borders.border400
+      margin: '2px',
+      boxSizing: 'border-box'
     },
 
     header: {
-
+      display: 'flex',
+      alignItems: 'center',
+      borderWidth: '0 0 .5px 0',
+      borderColor: theme.borders.border400.borderColor,
+      borderStyle: 'solid',
+      marginBottom: '3px',
+      padding: '4px 10px'
     },
 
     body: {
@@ -84,8 +94,18 @@ const useDataExplorerStyles = defineStyles(theme => {
       borderWidth: `${theme.borders.border400.borderWidth} 0 0 0`,
     },
 
-    dataTable: {
+    title: {
+      ...theme.typography.font550,
+      fontWeight: 400,
+      padding: '3px 4px',
+      margin: '0 28px 0 0'
+    },
 
+    actionButtons: {
+    },
+
+    dataTable: {
+  
     },
 
     paginator: {
@@ -131,23 +151,34 @@ const useDataExplorerStyles = defineStyles(theme => {
 // --- views ---------------------------------------------------------
 
 function DataExplorerView({
-
-}) {
+  title
+}: DataExplorerProps) {
   const classes = useDataExplorerStyles()
 
   return (
     <div className={classes.root}>
-      {renderHeader(classes)}
+      {renderHeader(title, classes)}
       {renderBody(classes)}
       {renderFooter(classes)}
     </div>
   )
 }
 
-function renderHeader(classes: DataExplorerClasses) {
+function renderHeader(
+  title: string | undefined,
+  classes: DataExplorerClasses
+) {
   return (
     <div className={classes.header}>
-      Header
+      <div className={classes.title}>
+        {title}
+      </div>
+      <div className={classes.actionButtons}>
+        <Button size={SIZE.compact} kind="minimal"><NewIcon/> &nbsp; New</Button>
+        <Button size={SIZE.compact} kind="tertiary"><EditIcon/> &nbsp; Edit</Button>
+        <Button size={SIZE.compact} kind="tertiary"><DeleteIcon/> &nbsp; Delete</Button>
+        <Button size={SIZE.compact} kind="tertiary"><DownloadIcon/> &nbsp; Export</Button>
+      </div>
     </div>
   ) 
 }

@@ -47,7 +47,7 @@ const useTextStyles = defineStyles(theme => {
     },
 
     large: {
-      ...theme.typography.font300
+      ...theme.typography.font400
     }
   }
 })

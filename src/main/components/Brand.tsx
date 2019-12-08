@@ -6,7 +6,6 @@ import * as Spec from 'js-spec/validators'
 
 // internal import
 import defineStyles from '../styling/tools/defineStyles'
-import Text from './Text'
 
 // --- components ----------------------------------------------------
 

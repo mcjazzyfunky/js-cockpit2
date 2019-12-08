@@ -10,7 +10,7 @@ import { FormControl } from 'baseui/form-control'
 import { Input, SIZE } from 'baseui/input'
 import { Button } from 'baseui/button'
 import { Checkbox } from 'baseui/checkbox'
-//import LoginGraphic from 'react-svg-loader!../illustrations/login.svg'
+import { IoIosUnlock as LoginIcon } from 'react-icons/io'
 
 // --- components ----------------------------------------------------
 
@@ -110,8 +110,10 @@ const useLoginScreenStyles = defineStyles(theme => {
     
     column1: {
       flexGrow: 5,
-      minWidth: '270px',
-      maxWidth: '270px',
+      display: 'flex',
+      flexDirection: 'column',
+      minWidth: '280px',
+      maxWidth: '280px',
       padding: '10px 24px',
       boxSizing: 'border-box',
       color: 'white',
@@ -137,15 +139,25 @@ const useLoginScreenStyles = defineStyles(theme => {
     column2: {
       display: 'flex',
       flexDirection: 'column',
+      minWidth: '300px',
+      maxWidth: '300px',
       padding: '24px 20px',
       flexGrow: 7,
       backgroundColor: 'white',
       borderRadius: '0 6px 6px 0'
     },
 
+    column1Top: {
+      flexGrow: 1
+    },
+
+    column1Bottom: {
+      marginBottom: '25px'
+    },
+
     headline: {
       ...theme.typography.font100,
-      fontSize: '34px',
+      fontSize: '32px',
       fontWeight: 100
     },
     
@@ -155,17 +167,17 @@ const useLoginScreenStyles = defineStyles(theme => {
       fontWeight: 100,
     },
 
-    loginFields: {
+    column2Top: {
       flexGrow: 1
     },
 
-    loginActions: {
+    column2Bottom: {
     },
 
     loginButton: {
       width: '100%',
       backgroundColor: 'rgb(0, 195, 154) !important',
-      margin: '16px 0 0 0'
+      margin: '16px 0 0 0 !important'
     }
   }
 })
@@ -185,8 +197,13 @@ function LoginScreenView({
       {renderHeader(slotHeader, classes)}
       <div className={classes.body}>
         <div className={classes.column1}>
-          <h3 className={classes.headline}>Login</h3>
-          <div className={classes.subheadline}>Please enter your credentials to log in</div>
+          <div className={classes.column1Top}>
+            <h3 className={classes.headline}>Login</h3>
+            <div className={classes.subheadline}>Please enter your credentials to log in</div>
+          </div>
+          <div className={classes.column1Bottom}>
+            <LoginIcon size="70"/>
+          </div>
         </div>
 
         <div className={classes.column2}>
@@ -237,7 +254,7 @@ function renderFields(fields: LoginField[] | undefined, classes: Classes) {
   }
 
   return (
-    <div className={classes.loginFields}>
+    <div className={classes.column2Top}>
       {
         fields.map(field => {
           switch (field.type) {
@@ -279,7 +296,7 @@ function renderLoginActions(classes: Classes) {
   }
 
   return (
-    <div className={classes.loginActions}>
+    <div className={classes.column2Bottom}>
       <Checkbox name="rememberLogin">
         Remember login
       </Checkbox>

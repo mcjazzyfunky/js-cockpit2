@@ -23,7 +23,7 @@ const Cockpit = component<CockpitProps>({
 type CockpitProps = {
   slotBrand?: ReactNode,
   slotTopNav?: ReactNode,
-  slotActionArea?: ReactNode,
+  slotActions?: ReactNode,
   slotMenu?: ReactNode,
   slotSidebar?: ReactNode,
   slotCenter?: ReactNode
@@ -37,7 +37,7 @@ const validateCockpitProps = Spec.checkProps({
   optional: {
     slotBrand: isNode,
     slotTopNav: isNode,
-    slotActionArea: isNode,
+    slotActions: isNode,
     slotMenu: isNode,
     slotSidebar: isNode,
     slotCenter: isNode,
@@ -59,9 +59,10 @@ const useCockpitStyles = defineStyles(theme => {
     },
 
     header: {
-      color: theme.colors.white,
+      color: theme.colors.white + ' !important',
       display: 'flex',
-      flexDirection: 'row'
+      alignItems: 'center',
+      backgroundColor: 'rgb(0, 195, 154)'
     },
     brand: {
       display: 'flex'
@@ -72,7 +73,7 @@ const useCockpitStyles = defineStyles(theme => {
       flexGrow: 1
     },
 
-    actionArea: {
+    actions: {
       display: 'flex'
     },
 
@@ -87,13 +88,13 @@ const useCockpitStyles = defineStyles(theme => {
     },
 
     sidebar: {
-      backgroundColor: 'green',
+      backgroundColor: '#f8f8f8',
       width: '250px'
     },
 
     center: {
       flexGrow: 1,
-      backgroundColor: 'yellow'
+      backgroundColor: 'white'
     }
   }
 })
@@ -103,7 +104,7 @@ const useCockpitStyles = defineStyles(theme => {
 function CockpitView({
   slotBrand,
   slotTopNav,
-  slotActionArea,
+  slotActions,
   slotMenu,
   slotSidebar,
   slotCenter
@@ -111,7 +112,7 @@ function CockpitView({
   const classes = useCockpitStyles()
 
   const
-    header = renderHeader(slotBrand, slotTopNav, slotActionArea, classes),
+    header = renderHeader(slotBrand, slotTopNav, slotActions, classes),
     menu = renderMenu(slotMenu, classes),
     body = renderBody(slotSidebar, slotCenter, classes)
 
@@ -127,10 +128,10 @@ function CockpitView({
 function renderHeader(
   slotBrand: ReactNode,
   slotTopNav: ReactNode,
-  slotActionArea: ReactNode,
+  slotActions: ReactNode,
   classes: Classes
 ) {
-  if (!slotBrand && !slotTopNav && !slotActionArea) {
+  if (!slotBrand && !slotTopNav && !slotActions) {
     return null
   }
 
@@ -143,9 +144,9 @@ function renderHeader(
       ? null
       : <div className={classes.topNav}>{slotTopNav}</div>,
     
-    col3 = !slotActionArea
+    col3 = !slotActions
       ? null
-      : <div className={classes.actionArea}>{slotActionArea}</div>
+      : <div className={classes.actions}>{slotActions}</div>
 
   return (
     <div className={classes.header}>{col1}{col2}{col3}</div>

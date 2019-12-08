@@ -5,6 +5,7 @@ export { default as Cockpit } from './components/Cockpit'
 export { default as DataExplorer } from './components/DataExplorer'
 export { default as LoginScreen } from './components/LoginScreen'
 export { default as LogoutButton } from './components/LogoutButton'
+export { default as SideNav } from './components/SideNav'
 export { default as Text } from './components/Text'
 export { default as UserMenu } from './components/UserMenu'
 

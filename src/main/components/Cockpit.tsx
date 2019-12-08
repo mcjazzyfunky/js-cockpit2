@@ -2,6 +2,7 @@
 import React, { ReactNode } from 'react'
 import { component, isNode } from 'js-react-utils'
 import * as Spec from 'js-spec/validators'
+import { ThemeProvider, DarkThemeMove as DarkTheme } from 'baseui'
 
 // internal import
 import defineStyles from '../styling/tools/defineStyles'
@@ -47,6 +48,8 @@ const validateCockpitProps = Spec.checkProps({
 // --- styles --------------------------------------------------------
 
 const useCockpitStyles = defineStyles(theme => {
+  theme = DarkTheme
+
   return {
     root: {
       display: 'flex',
@@ -59,13 +62,18 @@ const useCockpitStyles = defineStyles(theme => {
     },
 
     header: {
-      color: theme.colors.white + ' !important',
       display: 'flex',
       alignItems: 'center',
-      backgroundColor: 'rgb(0, 195, 154)'
+      //backgroundColor: theme.colors.headerNavigationFill,
+      backgroundColor: '#484848',
+      color: theme.colors.white,
+      minHeight: '48px'
     },
+
     brand: {
-      display: 'flex'
+      display: 'flex',
+      marginRight: '40px',
+      marginTop: '-4px' // TODO!!!
     },
 
     topNav: {
@@ -149,7 +157,9 @@ function renderHeader(
       : <div className={classes.actions}>{slotActions}</div>
 
   return (
-    <div className={classes.header}>{col1}{col2}{col3}</div>
+    //<ThemeProvider theme={DarkTheme}>
+      <div className={classes.header}>{col1}{col2}{col3}</div>
+    //</ThemeProvider>
   )
 }
 

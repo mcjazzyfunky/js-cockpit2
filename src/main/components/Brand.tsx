@@ -48,7 +48,8 @@ const useBrandStyles = defineStyles(theme => {
     root: {
       display: 'flex',
       alignItems: 'center',
-      fontSize: '18px'
+      fontSize: '18px',
+      //color: theme.colors.backgroundInv
     },
 
     column1: {
@@ -70,7 +71,7 @@ const useBrandStyles = defineStyles(theme => {
     },
 
     logoMulticolor: {
-      color: theme.colors.accent400
+      color: theme.colors.primary300
     },
 
     vendor: {
@@ -87,7 +88,7 @@ const useBrandStyles = defineStyles(theme => {
     },
 
     scaleSmall: {
-      transform: 'scale(.9, .9)'
+      transform: 'scale(.8, .8)'
     },
 
     scaleLarge: {

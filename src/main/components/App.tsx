@@ -4,7 +4,10 @@ import { component, isNode } from 'js-react-utils'
 import * as Spec from 'js-spec/validators'
 import {Client as Styletron} from 'styletron-engine-atomic'
 import {Provider as StyletronProvider} from 'styletron-react'
-import {LightTheme, BaseProvider, styled} from 'baseui'
+import { BaseProvider, styled} from 'baseui'
+
+// internal imports
+import BlueLightTheme from '../styling/themes/BlueLightTheme'
 
 // --- components ----------------------------------------------------
 
@@ -48,7 +51,7 @@ function AppView({
         `}
       </style>
       <StyletronProvider value={engine}>
-        <BaseProvider theme={LightTheme}>
+        <BaseProvider theme={BlueLightTheme}>
           {children}
         </BaseProvider>
       </StyletronProvider>

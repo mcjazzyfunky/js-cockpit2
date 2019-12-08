@@ -117,7 +117,8 @@ const useLoginScreenStyles = defineStyles(theme => {
       padding: '10px 24px',
       boxSizing: 'border-box',
       color: 'white',
-      backgroundColor: 'rgb(0, 195, 154)',
+      //backgroundColor: 'rgb(0, 195, 154)',
+      backgroundColor: theme.colors.primary,
       borderRadius: '6px 0 0 6px',
       textAlign: 'center',
 
@@ -176,7 +177,8 @@ const useLoginScreenStyles = defineStyles(theme => {
 
     loginButton: {
       width: '100%',
-      backgroundColor: 'rgb(0, 195, 154) !important',
+      //backgroundColor: 'rgb(0, 195, 154) !important',
+      backgroundColor: theme.colors.primary,
       margin: '16px 0 0 0 !important'
     }
   }

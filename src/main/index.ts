@@ -9,10 +9,11 @@ export { default as WorkspaceSelector } from './components/WorkspaceSelector'
 export { default as LoginScreen } from './components/LoginScreen'
 export { default as LogoutButton } from './components/LogoutButton'
 export { default as OptionGroup } from './components/OptionGroup'
+export { default as PasswordInput } from './components/PasswordInput'
 export { default as SelectBox } from './components/SelectBox'
 export { default as SideNav } from './components/SideNav'
 export { default as Text } from './components/Text'
-export { default as TextField } from './components/TextField'
+export { default as TextInput } from './components/TextInput'
 export { default as UserMenu } from './components/UserMenu'
 
 // hoks

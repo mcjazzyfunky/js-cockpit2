@@ -1,16 +1,15 @@
 // external imports
 import React, { ReactNode } from 'react'
 import { component, isNode } from 'js-react-utils'
+import { Button, SIZE } from 'baseui/button'
+import { Checkbox } from 'baseui/checkbox'
+import { IoIosUnlock as LoginIcon } from 'react-icons/io'
 import * as Spec from 'js-spec/validators'
 
 // internal import
-import Text from './Text'
 import defineStyles from '../tools/defineStyles'
-import { FormControl } from 'baseui/form-control'
-import { Input, SIZE } from 'baseui/input'
-import { Button } from 'baseui/button'
-import { Checkbox } from 'baseui/checkbox'
-import { IoIosUnlock as LoginIcon } from 'react-icons/io'
+import TextInput from './TextInput'
+import PasswordInput from './PasswordInput'
 
 // --- components ----------------------------------------------------
 
@@ -29,8 +28,8 @@ const LoginScreen = component<LoginScreenProps>({
 type LoginScreenProps = {
   slotHeader?: ReactNode,
   slotFooter?: ReactNode,
-  
-  loginFields?: LoginField[]
+  slotLoginIntro?: ReactNode,
+  slotLoginFields?: ReactNode
 }
 
 type LoginField = 
@@ -45,28 +44,8 @@ const validateLoginScreenProps = Spec.checkProps({
   optional: {
     slotHeader: isNode,
     slotFooter: isNode,
-  
-    loginFields: Spec.arrayOf(
-      Spec.and(
-        Spec.prop('type', Spec.oneOf('text', 'password', 'select')),
-
-        Spec.or({
-          when: Spec.prop('type', Spec.is('type')),
-          then: Spec.exact({
-            type: Spec.is('text'),
-            name: Spec.string,
-            label: Spec.string
-          })
-        }, {
-          when: Spec.prop('type', Spec.is('type')),
-          then: Spec.exact({
-            type: Spec.is('text'),
-            name: Spec.string,
-            label: Spec.string
-          })
-        })
-      )
-    )
+    slotLoginIntro: isNode,
+    slotLoginFields: isNode
   }
 })
 
@@ -82,6 +61,7 @@ const useLoginScreenStyles = defineStyles(theme => {
       width: '100%',
       height: '100%',
       backgroundColor: '#f3f3f2',
+      ...theme.typography.font200
     },
 
     topSpacer: {
@@ -114,7 +94,7 @@ const useLoginScreenStyles = defineStyles(theme => {
       flexDirection: 'column',
       minWidth: '280px',
       maxWidth: '280px',
-      padding: '10px 24px',
+      padding: '24px 20px',
       boxSizing: 'border-box',
       color: 'white',
       //backgroundColor: 'rgb(0, 195, 154)',
@@ -153,19 +133,20 @@ const useLoginScreenStyles = defineStyles(theme => {
     },
 
     column1Bottom: {
-      marginBottom: '25px'
     },
 
     headline: {
-      ...theme.typography.font100,
+      ...theme.typography.font200,
       fontSize: '32px',
-      fontWeight: 100
+      fontWeight: 100,
+      marginTop: '10px',
+      height: '40px'
     },
     
     subheadline: {
-      ...theme.typography.font100,
+      ...theme.typography.font200,
       fontSize: '17px',
-      fontWeight: 100,
+      fontWeight: 100
     },
 
     column2Top: {
@@ -189,7 +170,8 @@ const useLoginScreenStyles = defineStyles(theme => {
 function LoginScreenView({
   slotHeader,
   slotFooter,
-  loginFields
+  slotLoginIntro,
+  slotLoginFields
 }: LoginScreenProps) {
   const classes = useLoginScreenStyles()
 
@@ -200,8 +182,11 @@ function LoginScreenView({
       <div className={classes.body}>
         <div className={classes.column1}>
           <div className={classes.column1Top}>
-            <h3 className={classes.headline}>Login</h3>
-            <div className={classes.subheadline}>Please enter your credentials to log in</div>
+            {
+              slotLoginIntro
+                ? slotLoginIntro
+                : renderDefaultLoginIntro(classes)
+            }
           </div>
           <div className={classes.column1Bottom}>
             <LoginIcon size="70"/>
@@ -209,8 +194,16 @@ function LoginScreenView({
         </div>
 
         <div className={classes.column2}>
-          {renderFields(loginFields, classes)}
-          {renderLoginActions(classes)}
+          <div className={classes.column2Top}>
+            {
+              slotLoginFields
+                ? slotLoginFields
+                : renderDefaultLoginFields(classes)
+            }
+          </div>
+          <div className={classes.column2Bottom}>
+            {renderLoginActions(classes)}
+          </div>
         </div>
       </div>
       {renderFooter(slotFooter, classes)}
@@ -249,42 +242,21 @@ function renderFooter(
   )
 }
 
-function renderFields(fields: LoginField[] | undefined, classes: Classes) {
-  console.log(fields)
-  if (!fields) {
-    return null
-  }
-
+function renderDefaultLoginIntro(classes: Classes) {
   return (
-    <div className={classes.column2Top}>
-      {
-        fields.map(field => {
-          switch (field.type) {
-          case 'text':
-            return renderTextField(field, classes)
-          
-          case 'password':
-            return renderPasswordField(field, classes)
-          }
-        })
-      }
-    </div>
+    <>
+      <div className={classes.headline}>Login</div>
+      <div className={classes.subheadline}>Please enter your credentials to log in</div>
+    </>
   )
 }
 
-function renderTextField(field: LoginField, classes: Classes) {
+function renderDefaultLoginFields(classes: Classes) {
   return (
-    <FormControl label={field.label}>
-      <Input size={SIZE.compact} name={field.name}/>
-    </FormControl>
-  )
-}
-
-function renderPasswordField(field: LoginField, classes: Classes) {
-  return (
-    <FormControl label={field.label}>
-      <Input type="password" size={SIZE.compact} name={field.name}/>
-    </FormControl>
+    <>
+      <TextInput size="compact" label="Username"/>
+      <PasswordInput size="compact" label="Password"/>
+    </>
   )
 }
 

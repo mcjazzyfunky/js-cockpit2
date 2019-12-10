@@ -16,10 +16,5 @@ export const loginScreen = () =>
         />}
 
       slotFooter={<Text>&copy; 2019, meet+greet</Text>}
-
-      loginFields={[
-        { type: 'text', name: 'username', label: 'Username' },
-        { type: 'password', name: 'password', label: 'Password' }
-      ]}
     />
   </App>

@@ -10,34 +10,39 @@ import defineStyles from '../tools/defineStyles'
 
 // --- components ----------------------------------------------------
 
-const TextField = component<TextFieldProps>({
-  displayName: 'TextField',
+const PasswordInput = component<PasswordInputProps>({
+  displayName: 'PasswordInput',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validateTextFieldProps) }
+    ? { validate: Spec.lazy(() => validatePasswordInputProps) }
     : null,
  
-  render: TextFieldView
+  render: PasswordInputView
 })
 
 // --- types ---------------------------------------------------------
 
-type TextFieldProps = {
+type PasswordInputProps = {
   name?: string,
   label?: string,
-  disabled?: boolean
+  disabled?: boolean,
+  size?: 'compact' | 'default' | 'large'
 }
 
 // --- validation ----------------------------------------------------
 
-const validateTextFieldProps = Spec.checkProps({
+const validatePasswordInputProps = Spec.checkProps({
   optional: {
+    name: Spec.string,
+    label: Spec.string,
+    disabled: Spec.boolean,
+    size: Spec.oneOf('compact', 'default', 'large')
   }
 })
 
 // --- styles --------------------------------------------------------
 
-const useTextFieldStyles = defineStyles(theme => {
+const usePasswordInputStyles = defineStyles(theme => {
   return {
     root: {
     },
@@ -46,20 +51,21 @@ const useTextFieldStyles = defineStyles(theme => {
 
 // --- view ----------------------------------------------------------
 
-function TextFieldView({
+function PasswordInputView({
   name,
   label,
-  disabled
-}: TextFieldProps) {
-  const classes = useTextFieldStyles()
+  disabled,
+  size = 'default'
+}: PasswordInputProps) {
+  const classes = usePasswordInputStyles()
 
   return (
     <FormControl label={label}>
-      <Input disabled={disabled} name={name}/>
+      <Input type="password" disabled={disabled} name={name} size={size}/>
     </FormControl>
   )
 }
 
 // --- exports -------------------------------------------------------
 
-export default TextField 
+export default PasswordInput 

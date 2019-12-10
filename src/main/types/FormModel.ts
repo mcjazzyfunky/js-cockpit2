@@ -1,5 +1,5 @@
 // internal imports
-import FormField from './FOrmField'
+import FormField from './FormField'
 
 // --- types ---------------------------------------------------------
 

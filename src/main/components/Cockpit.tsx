@@ -5,7 +5,7 @@ import * as Spec from 'js-spec/validators'
 import { ThemeProvider, DarkThemeMove as DarkTheme } from 'baseui'
 
 // internal import
-import defineStyles from '../styling/tools/defineStyles'
+import defineStyles from '../tools/defineStyles'
 
 // --- components ----------------------------------------------------
 

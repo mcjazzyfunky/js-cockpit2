@@ -1,6 +1,8 @@
 // external imports
 import React, { ReactNode } from 'react'
 import { component, isNode } from 'js-react-utils'
+import { Datepicker } from 'baseui/datepicker'
+import { FormControl } from 'baseui/form-control'
 import * as Spec from 'js-spec/validators'
 
 // internal import
@@ -8,65 +10,52 @@ import defineStyles from '../tools/defineStyles'
 
 // --- components ----------------------------------------------------
 
-const Text = component<TextProps>({
-  displayName: 'Text',
+const DateField = component<DateFieldProps>({
+  displayName: 'DateField',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validateTextProps) }
+    ? { validate: Spec.lazy(() => validateDateFieldProps) }
     : null,
  
-  render: TextView
+  render: DateFieldView
 })
 
 // --- types ---------------------------------------------------------
 
-type TextProps = {
-  size?: 'small' | 'medium' | 'large',
-  children?: ReactNode
+type DateFieldProps = {
+  label?: string
 }
 
 // --- validation ----------------------------------------------------
 
-const validateTextProps = Spec.checkProps({
+const validateDateFieldProps = Spec.checkProps({
   optional: {
-    size: Spec.oneOf('small', 'medium', 'large'),
-    children: isNode
   }
 })
 
 // --- styles --------------------------------------------------------
 
-const useTextStyles = defineStyles(theme => {
+const useDateFieldStyles = defineStyles(theme => {
   return {
-    small: {
-      ...theme.typography.font100
+    root: {
     },
-
-    medium: {
-      ...theme.typography.font200
-    },
-
-    large: {
-      ...theme.typography.font400
-    }
   }
 })
 
 // --- view ----------------------------------------------------------
 
-function TextView({
-  size = 'medium',
-  children
-}: TextProps) {
-  const classes = useTextStyles()
+function DateFieldView({
+  label
+}: DateFieldProps) {
+  const classes = useDateFieldStyles()
 
   return (
-    <span className={classes[size]}>
-      {children}
-    </span>
+    <FormControl label={label}>
+      <Datepicker/>
+    </FormControl>
   )
 }
 
 // --- exports -------------------------------------------------------
 
-export default Text 
+export default DateField 

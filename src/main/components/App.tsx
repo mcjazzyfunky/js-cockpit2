@@ -7,7 +7,7 @@ import {Provider as StyletronProvider} from 'styletron-react'
 import { BaseProvider, styled} from 'baseui'
 
 // internal imports
-import BlueLightTheme from '../styling/themes/BlueLightTheme'
+import BlueLightTheme from '../themes/BlueLightTheme'
 
 // --- components ----------------------------------------------------
 

@@ -5,7 +5,7 @@ import { FiLayers as DefaultLogo } from 'react-icons/fi'
 import * as Spec from 'js-spec/validators'
 
 // internal import
-import defineStyles from '../styling/tools/defineStyles'
+import defineStyles from '../tools/defineStyles'
 
 // --- components ----------------------------------------------------
 

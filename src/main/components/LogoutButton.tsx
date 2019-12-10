@@ -6,7 +6,7 @@ import { StatefulTooltip, PLACEMENT } from 'baseui/tooltip'
 import { MdPowerSettingsNew as LogoutIcon } from 'react-icons/md'
 
 // internal imports
-import defineStyles from '../styling/tools/defineStyles'
+import defineStyles from '../tools/defineStyles'
 
 
 // --- components ----------------------------------------------------

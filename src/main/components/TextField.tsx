@@ -1,6 +1,8 @@
 // external imports
 import React, { ReactNode } from 'react'
 import { component, isNode } from 'js-react-utils'
+import { Input } from 'baseui/input'
+import { FormControl } from 'baseui/form-control'
 import * as Spec from 'js-spec/validators'
 
 // internal import
@@ -8,65 +10,56 @@ import defineStyles from '../tools/defineStyles'
 
 // --- components ----------------------------------------------------
 
-const Text = component<TextProps>({
-  displayName: 'Text',
+const TextField = component<TextFieldProps>({
+  displayName: 'TextField',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validateTextProps) }
+    ? { validate: Spec.lazy(() => validateTextFieldProps) }
     : null,
  
-  render: TextView
+  render: TextFieldView
 })
 
 // --- types ---------------------------------------------------------
 
-type TextProps = {
-  size?: 'small' | 'medium' | 'large',
-  children?: ReactNode
+type TextFieldProps = {
+  name?: string,
+  label?: string,
+  disabled?: boolean
 }
 
 // --- validation ----------------------------------------------------
 
-const validateTextProps = Spec.checkProps({
+const validateTextFieldProps = Spec.checkProps({
   optional: {
-    size: Spec.oneOf('small', 'medium', 'large'),
-    children: isNode
   }
 })
 
 // --- styles --------------------------------------------------------
 
-const useTextStyles = defineStyles(theme => {
+const useTextFieldStyles = defineStyles(theme => {
   return {
-    small: {
-      ...theme.typography.font100
+    root: {
     },
-
-    medium: {
-      ...theme.typography.font200
-    },
-
-    large: {
-      ...theme.typography.font400
-    }
   }
 })
 
 // --- view ----------------------------------------------------------
 
-function TextView({
-  size = 'medium',
-  children
-}: TextProps) {
-  const classes = useTextStyles()
+function TextFieldView({
+  name,
+  label,
+  disabled
+}: TextFieldProps) {
+  const classes = useTextFieldStyles()
 
   return (
-    <span className={classes[size]}>
-      {children}
-    </span>
+    <FormControl label={label}>
+      <Input disabled={disabled} name={name}/>
+    </FormControl>
   )
 }
 
 // --- exports -------------------------------------------------------
 
-export default Text 
+export default TextField 

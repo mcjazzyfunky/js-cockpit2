@@ -4,7 +4,7 @@ import { component, isNode } from 'js-react-utils'
 import * as Spec from 'js-spec/validators'
 
 // internal import
-import defineStyles from '../styling/tools/defineStyles'
+import defineStyles from '../tools/defineStyles'
 
 // --- components ----------------------------------------------------
 

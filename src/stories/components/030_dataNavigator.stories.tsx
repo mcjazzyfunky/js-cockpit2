@@ -5,7 +5,7 @@ export default {
   title: 'Data driven components'
 }
 
-export const woohoo = () => (
+export const dataExplorer = () => (
   <App>
     <DataExplorer
 

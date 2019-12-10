@@ -5,7 +5,7 @@ import * as Spec from 'js-spec/validators'
 
 // internal import
 import Text from './Text'
-import defineStyles from '../styling/tools/defineStyles'
+import defineStyles from '../tools/defineStyles'
 import { FormControl } from 'baseui/form-control'
 import { Input, SIZE } from 'baseui/input'
 import { Button } from 'baseui/button'

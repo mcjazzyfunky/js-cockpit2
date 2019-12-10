@@ -1,6 +1,7 @@
 // external imports
 import React, { ReactNode } from 'react'
 import { component, isNode } from 'js-react-utils'
+import { FiLayers as DefaultLogo } from 'react-icons/fi'
 import * as Spec from 'js-spec/validators'
 
 // internal import
@@ -8,65 +9,48 @@ import defineStyles from '../tools/defineStyles'
 
 // --- components ----------------------------------------------------
 
-const Text = component<TextProps>({
-  displayName: 'Text',
+const SelectBox = component<SelectBoxProps>({
+  displayName: 'SelectBox',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validateTextProps) }
+    ? { validate: Spec.lazy(() => validateSelectBoxProps) }
     : null,
  
-  render: TextView
+  render: SelectBoxView
 })
 
 // --- types ---------------------------------------------------------
 
-type TextProps = {
-  size?: 'small' | 'medium' | 'large',
-  children?: ReactNode
+type SelectBoxProps = {
 }
 
 // --- validation ----------------------------------------------------
 
-const validateTextProps = Spec.checkProps({
+const validateSelectBoxProps = Spec.checkProps({
   optional: {
-    size: Spec.oneOf('small', 'medium', 'large'),
-    children: isNode
   }
 })
 
 // --- styles --------------------------------------------------------
 
-const useTextStyles = defineStyles(theme => {
+const useSelectBoxStyles = defineStyles(theme => {
   return {
-    small: {
-      ...theme.typography.font100
+    root: {
     },
-
-    medium: {
-      ...theme.typography.font200
-    },
-
-    large: {
-      ...theme.typography.font400
-    }
   }
 })
 
 // --- view ----------------------------------------------------------
 
-function TextView({
-  size = 'medium',
-  children
-}: TextProps) {
-  const classes = useTextStyles()
+function SelectBoxView({
+}: SelectBoxProps) {
+  const classes = useSelectBoxStyles()
 
   return (
-    <span className={classes[size]}>
-      {children}
-    </span>
+    '[SelectBox]'
   )
 }
 
 // --- exports -------------------------------------------------------
 
-export default Text 
+export default SelectBox 

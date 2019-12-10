@@ -1,6 +1,7 @@
 // external imports
 import React, { ReactNode } from 'react'
 import { component, isNode } from 'js-react-utils'
+import { FiLayers as DefaultLogo } from 'react-icons/fi'
 import * as Spec from 'js-spec/validators'
 
 // internal import
@@ -8,65 +9,48 @@ import defineStyles from '../tools/defineStyles'
 
 // --- components ----------------------------------------------------
 
-const Text = component<TextProps>({
-  displayName: 'Text',
+const CheckGroup = component<CheckGroupProps>({
+  displayName: 'CheckGroup',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validateTextProps) }
+    ? { validate: Spec.lazy(() => validateCheckGroupProps) }
     : null,
  
-  render: TextView
+  render: CheckGroupView
 })
 
 // --- types ---------------------------------------------------------
 
-type TextProps = {
-  size?: 'small' | 'medium' | 'large',
-  children?: ReactNode
+type CheckGroupProps = {
 }
 
 // --- validation ----------------------------------------------------
 
-const validateTextProps = Spec.checkProps({
+const validateCheckGroupProps = Spec.checkProps({
   optional: {
-    size: Spec.oneOf('small', 'medium', 'large'),
-    children: isNode
   }
 })
 
 // --- styles --------------------------------------------------------
 
-const useTextStyles = defineStyles(theme => {
+const useCheckGroupStyles = defineStyles(theme => {
   return {
-    small: {
-      ...theme.typography.font100
+    root: {
     },
-
-    medium: {
-      ...theme.typography.font200
-    },
-
-    large: {
-      ...theme.typography.font400
-    }
   }
 })
 
 // --- view ----------------------------------------------------------
 
-function TextView({
-  size = 'medium',
-  children
-}: TextProps) {
-  const classes = useTextStyles()
+function CheckGroupView({
+}: CheckGroupProps) {
+  const classes = useCheckGroupStyles()
 
   return (
-    <span className={classes[size]}>
-      {children}
-    </span>
+    '[CheckGroup]'
   )
 }
 
 // --- exports -------------------------------------------------------
 
-export default Text 
+export default CheckGroup 

@@ -7,8 +7,8 @@ import { Accordion, Panel } from 'baseui/accordion'
 import { Navigation } from 'baseui/side-navigation'
 
 // internal import
-import defineStyles from '../styling/tools/defineStyles'
-import classNames from '../styling/tools/classNames'
+import defineStyles from '../tools/defineStyles'
+import classNames from '../tools/classNames'
 
 // --- components ----------------------------------------------------
 

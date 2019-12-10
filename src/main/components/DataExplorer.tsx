@@ -20,7 +20,7 @@ import {
 } from 'baseui/table-grid'
 
 // internal imports
-import defineStyles from '../styling/tools/defineStyles'
+import defineStyles from '../tools/defineStyles'
 import Text from './Text'
 
 // derived imports

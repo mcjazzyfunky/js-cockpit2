@@ -17,8 +17,8 @@ export { default as UserMenu } from './components/UserMenu'
 
 // hoks
 export { default as useFormCtrl } from './hooks/useFormCtrl'
+export { default as useFormMgmt } from './hooks/useFormMgmt'
 
 // tools
 export { default as classNames } from './tools/classNames'
 export { default as defineStyles } from './tools/defineStyles'
-export { default as defineFormMgmt } from './tools/defineFormMgmt'

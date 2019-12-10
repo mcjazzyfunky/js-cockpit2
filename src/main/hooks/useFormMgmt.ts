@@ -11,28 +11,25 @@ import FormCtrl from '../types/FormCtrl'
 
 // -- exports --------------------------------------------------------
 
-export default function defineFormMgmt(formModel: FormModel) {
-  const useFormMgmt = () => {
-    const
-      ctrl: FormCtrl = null as any // TODO,
-    
-    function FormCtrlProvider({
-      children 
-    }: {
-      children: ReactNode
-    }) {
-      return h(FormCtrlCtx.Provider, { value: ctrl }, children)
-    }
-
-    function setSubmitHandler() {
-      // TODO
-    }
-
-    return [ctrl, setSubmitHandler, FormCtrlProvider]
+export default function useFormMgmt(formModel: FormModel) {
+  const
+    formCtrl: FormCtrl = null as any // TODO,
+  
+  function FormCtrlProvider({
+    children 
+  }: {
+    children: ReactNode
+  }) {
+    return h(FormCtrlCtx.Provider, { value: formCtrl }, children)
   }
 
-  return useFormMgmt
+  function setSubmitHandler() {
+    // TODO
+  }
+
+  return [formCtrl, setSubmitHandler, FormCtrlProvider]
 }
+
 // --- types ---------------------------------------------------------
 
 type FormCtrlParams = {

@@ -26,7 +26,10 @@ type PasswordInputProps = {
   name?: string,
   label?: string,
   disabled?: boolean,
+  required?: boolean,
   size?: 'compact' | 'default' | 'large'
+  pattern?: RegExp,
+  messageOnError?: string
 }
 
 // --- validation ----------------------------------------------------
@@ -36,7 +39,10 @@ const validatePasswordInputProps = Spec.checkProps({
     name: Spec.string,
     label: Spec.string,
     disabled: Spec.boolean,
-    size: Spec.oneOf('compact', 'default', 'large')
+    required: Spec.boolean,
+    size: Spec.oneOf('compact', 'default', 'large'),
+    pattern: Spec.instanceOf(RegExp),
+    messageOnError: Spec.string
   }
 })
 

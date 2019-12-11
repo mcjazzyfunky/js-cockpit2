@@ -8,8 +8,13 @@ import * as Spec from 'js-spec/validators'
 
 // internal import
 import defineStyles from '../tools/defineStyles'
+import createFormCtrl from '../control/createFormCtrl'
+import FormCtrlCtx from '../context/FormCtrlCtx'
 import TextInput from './TextInput'
 import PasswordInput from './PasswordInput'
+
+// derived imports
+const { useCallback, useState } = React
 
 // --- components ----------------------------------------------------
 
@@ -58,8 +63,8 @@ const useLoginScreenStyles = defineStyles(theme => {
       flexDirection: 'column',
       alignItems: 'center',
       position: 'absolute',
-      width: '100%',
-      height: '100%',
+      minWidth: '100%',
+      minHeight: '100%',
       backgroundColor: '#f3f3f2',
       ...theme.typography.font200
     },
@@ -173,7 +178,15 @@ function LoginScreenView({
   slotLoginIntro,
   slotLoginFields
 }: LoginScreenProps) {
-  const classes = useLoginScreenStyles()
+  const
+    classes = useLoginScreenStyles(),
+    [formCtrl] = useState(createFormCtrl),
+
+    onSubmit = useCallback((ev: any) => { // TODO
+      ev.preventDefault()
+
+      formCtrl.submit()
+    }, [])
 
   return (
     <div className={classes.root}>
@@ -193,18 +206,20 @@ function LoginScreenView({
           </div>
         </div>
 
-        <div className={classes.column2}>
-          <div className={classes.column2Top}>
-            {
-              slotLoginFields
-                ? slotLoginFields
-                : renderDefaultLoginFields(classes)
-            }
-          </div>
-          <div className={classes.column2Bottom}>
-            {renderLoginActions(classes)}
-          </div>
-        </div>
+        <form className={classes.column2} onSubmit={onSubmit}>
+          <FormCtrlCtx.Provider value={formCtrl}>
+            <div className={classes.column2Top}>
+              {
+                slotLoginFields
+                  ? slotLoginFields
+                  : renderDefaultLoginFields(classes)
+              }
+            </div>
+            <div className={classes.column2Bottom}>
+              {renderLoginActions(classes)}
+            </div>
+          </FormCtrlCtx.Provider>
+        </form>
       </div>
       {renderFooter(slotFooter, classes)}
       <div className={classes.bottomSpacer}/>
@@ -254,8 +269,8 @@ function renderDefaultLoginIntro(classes: Classes) {
 function renderDefaultLoginFields(classes: Classes) {
   return (
     <>
-      <TextInput size="compact" label="Username"/>
-      <PasswordInput size="compact" label="Password"/>
+      <TextInput name="username" label="Username" required size="compact" pattern={/aaaa/}/>
+      <PasswordInput name="password" label="Password" required size="compact"/>
     </>
   )
 }

@@ -17,7 +17,7 @@ export { default as TextInput } from './components/TextInput'
 export { default as UserMenu } from './components/UserMenu'
 
 // hoks
-export { default as useFormCtrl } from './hooks/useFormCtrl'
+export { default as useAdvancedFormCtrl } from './hooks/useAdvancedFormCtrl'
 export { default as useFormMgmt } from './hooks/useFormMgmt'
 
 // tools

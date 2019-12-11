@@ -2,16 +2,13 @@
 import React from 'react'
 
 // internal imports
-import FormCtrlCtx from '../context/FormCtrlCtx'
+import FormCtx from '../context/FormCtrlCtx'
 
 // derived imports
 const { useContext } = React
 
-// --- hoks -----------------------------------------------------------
+// --- hoooks --------------------------------------------------------
 
-function useFormCtrl() {
-  return useContext(FormCtrlCtx)
+export default function useFormCtrl() {
+  return useContext(FormCtx)
 }
-
-// --- exports ---------------------------------------------------------
-export default useFormCtrl

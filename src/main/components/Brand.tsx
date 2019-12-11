@@ -147,4 +147,4 @@ function BrandView({
 
 // --- exports -------------------------------------------------------
 
-export default Brand 
+export default Brand

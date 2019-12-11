@@ -1,17 +1,22 @@
+import AdvancedFormCtrlCtx from "../context/AdvancedFormCtrlCtx"
+
 // --- types ---------------------------------------------------------
 
 type FormCtrl = {
-  setFieldValue(fieldName: string, value: any, dirty: boolean): void,
-  getFieldValue(fieldName: string): any,
-  isFieldDirty(fieldName: string): boolean,
-  isFieldRequired(fieldName: string): boolean,
-  isFieldDisabled(fieldName: string): boolean,
-  getFieldErrors(fieldName: string): string[],
-  getGeneralErrors(): string[],
-  getFormData(dirty: boolean): Record<string, any>,
+  registerComponent(requestValue: (update: boolean) => Response): () => void,
   submit(): void
+}
+
+type Response = {
+  name: string,
+  valid: true,
+  value: any
+} | { 
+  name: string,
+  valid: false
 }
 
 // --- exports -------------------------------------------------------
 
 export default FormCtrl
+

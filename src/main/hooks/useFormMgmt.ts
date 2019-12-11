@@ -5,34 +5,34 @@ import React, { ReactNode } from 'react'
 const { createElement: h } = React
 
 // internal imports
-import FormCtrlCtx from '../context/FormCtrlCtx'
+import AdvancedFormCtrlCtx from '../context/AdvancedFormCtrlCtx'
 import FormModel from '../types/FormModel'
-import FormCtrl from '../types/FormCtrl'
+import AdvancedFormCtrl from '../types/AdvancedFormCtrl'
 
 // -- exports --------------------------------------------------------
 
 export default function useFormMgmt(formModel: FormModel) {
   const
-    formCtrl: FormCtrl = null as any // TODO,
+    AdvancedFormCtrl: AdvancedFormCtrl = null as any // TODO,
   
-  function FormCtrlProvider({
+  function AdvancedFormCtrlProvider({
     children 
   }: {
     children: ReactNode
   }) {
-    return h(FormCtrlCtx.Provider, { value: formCtrl }, children)
+    return h(AdvancedFormCtrlCtx.Provider, { value: AdvancedFormCtrl }, children)
   }
 
   function setSubmitHandler() {
     // TODO
   }
 
-  return [formCtrl, setSubmitHandler, FormCtrlProvider]
+  return [AdvancedFormCtrl, setSubmitHandler, AdvancedFormCtrlProvider]
 }
 
 // --- types ---------------------------------------------------------
 
-type FormCtrlParams = {
+type AdvancedFormCtrlParams = {
   initialData: Record<string, any>,
   handleChange(fieldName: string, value: any, dirty: boolean): void,
   handleSubmit(data: Record<string, any>): void,
@@ -43,14 +43,14 @@ type FormCtrlParams = {
 
 // --- misc ----------------------------------------------------------
 
-function createFormCtrl({
+function createAdvancedFormCtrl({
   initialData = {},
   handleChange,
   handleSubmit,
   isFieldRequired,
   isFieldDisabled,
   getGeneralErrors
-}: FormCtrlParams): FormCtrl {
+}: AdvancedFormCtrlParams): AdvancedFormCtrl {
   const
     data: Map<string, any> = new Map(),
     dirtyData: Map<string, any> = new Map(),
@@ -61,7 +61,7 @@ function createFormCtrl({
     dirtyData.set(key, value)
   })
 
-  const ret: FormCtrl = {
+  const ret: AdvancedFormCtrl = {
     setFieldValue(fieldName, value, dirty = false) {
       if (!dirty) {
         data.set(fieldName, value)

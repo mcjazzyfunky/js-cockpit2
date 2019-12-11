@@ -2,7 +2,6 @@
 import React, { ReactNode } from 'react'
 import { component, isNode } from 'js-react-utils'
 import { Button, SIZE } from 'baseui/button'
-import { Checkbox } from 'baseui/checkbox'
 import { IoIosUnlock as LoginIcon } from 'react-icons/io'
 import * as Spec from 'js-spec/validators'
 
@@ -10,8 +9,9 @@ import * as Spec from 'js-spec/validators'
 import defineStyles from '../tools/defineStyles'
 import createFormCtrl from '../control/createFormCtrl'
 import FormCtrlCtx from '../context/FormCtrlCtx'
-import TextInput from './TextInput'
-import PasswordInput from './PasswordInput'
+import TextField from './TextField'
+import PasswordField from './PasswordField'
+import CheckBox from './CheckBox'
 
 // derived imports
 const { useCallback, useState } = React
@@ -269,8 +269,8 @@ function renderDefaultLoginIntro(classes: Classes) {
 function renderDefaultLoginFields(classes: Classes) {
   return (
     <>
-      <TextInput name="username" label="Username" required size="compact"/>
-      <PasswordInput name="password" label="Password" required size="compact"/>
+      <TextField name="username" label="Username" required size="compact"/>
+      <PasswordField name="password" label="Password" required size="compact"/>
     </>
   )
 }
@@ -286,9 +286,7 @@ function renderLoginActions(classes: Classes) {
 
   return (
     <div className={classes.column2Bottom}>
-      <Checkbox name="rememberLogin">
-        Remember login
-      </Checkbox>
+      <CheckBox name="rememberLogin" label="Remember login"/>
       <Button size={SIZE.compact} overrides={overrides}>
         Log in
       </Button>

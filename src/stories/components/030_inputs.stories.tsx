@@ -1,15 +1,15 @@
 import React from 'react'
-import { App, DateField, TextInput, SelectBox } from '../js-cockpit'
+import { App, DateField, TextField, SelectBox } from '../js-cockpit'
 
 export default {
   title: 'Input components'
 }
 
-export const textInput = () =>
+export const textField = () =>
   <App>
-     <TextInput label="First name"/>
+     <TextField label="First name"/>
      <br/>
-     <TextInput label="Last name"/>
+     <TextField label="Last name"/>
   </App>
 
 export const selectBox = () =>

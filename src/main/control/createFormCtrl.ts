@@ -25,7 +25,11 @@ export default function createFormCtrl(): FormCtrl {
         }
       })
 
-      console.log(1111, !invalid, data)
+      if (invalid) {
+        console.log('Form data not valid')
+      } else {
+        console.log('Submitted data:', data)
+      }
     }
 
   return {

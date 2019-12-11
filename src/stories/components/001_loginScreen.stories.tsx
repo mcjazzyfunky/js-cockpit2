@@ -1,5 +1,5 @@
 import React from 'react'
-import { App, Brand, LoginScreen, Text } from '../js-cockpit'
+import { App, Brand, LoginScreen, Text, TextField, SelectBox, PasswordField } from '../js-cockpit'
 
 export default {
   title: 'Login screen'

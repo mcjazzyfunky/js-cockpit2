@@ -1,7 +1,7 @@
 // external imports
 import React, { FormEvent } from 'react'
 import { component, isNode } from 'js-react-utils'
-import { Select } from 'baseui/select'
+import { Input } from 'baseui/input'
 import { FormControl } from 'baseui/form-control'
 import * as Spec from 'js-spec/validators'
 
@@ -14,48 +14,45 @@ const { useCallback, useEffect, useState, useRef } = React
 
 // --- components ----------------------------------------------------
 
-const SelectBox = component<SelectBoxProps>({
-  displayName: 'SelectBox',
+const TextField = component<TextFieldProps>({
+  displayName: 'TextField',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validateSelectBoxProps) }
+    ? { validate: Spec.lazy(() => validateTextFieldProps) }
     : null,
  
-  render: SelectBoxView
+  render: TextFieldView
 })
 
 // --- types ---------------------------------------------------------
 
-type SelectBoxProps = {
+type TextFieldProps = {
   name?: string,
   label?: string,
   required?: boolean,
   disabled?: boolean,
   size?: 'compact' | 'default' | 'large',
-  messageOnError?: string,
-
-  options?: Array<{
-    key: string,
-    text: string
-  }>
+  pattern?: RegExp,
+  messageOnError?: string
 }
 
 // --- validation ----------------------------------------------------
 
-const validateSelectBoxProps = Spec.checkProps({
+const validateTextFieldProps = Spec.checkProps({
   optional: {
     name: Spec.string,
     label: Spec.string,
     disabled: Spec.boolean,
     required: Spec.boolean,
     size: Spec.oneOf('compact', 'default', 'large'),
+    pattern: Spec.instanceOf(RegExp),
     messageOnError: Spec.string
   }
 })
 
 // --- styles --------------------------------------------------------
 
-const useSelectBoxStyles = defineStyles(theme => {
+const useTextFieldStyles = defineStyles(theme => {
   return {
     root: {
     },
@@ -64,23 +61,24 @@ const useSelectBoxStyles = defineStyles(theme => {
 
 // --- view ----------------------------------------------------------
 
-function SelectBoxView({
+function TextFieldView({
   name,
   label,
   disabled,
   required = false,
   size = 'default',
-  messageOnError,
-  options
-}: SelectBoxProps) {
+  pattern,
+  messageOnError
+}: TextFieldProps) {
   const
-    [value, setValue] = useState<string | null>(null),
+    [value, setValue] = useState(''),
     [error, setError] = useState(''),
-    classes = useSelectBoxStyles(),
+    classes = useTextFieldStyles(),
     formCtrl = useFormCtrl(),
     nameRef = useRef(name),
     valueRef = useRef(value),
     requiredRef = useRef(required),
+    patternRef = useRef(pattern),
     messageOnErrorRef = useRef(messageOnError),
 
     onInput = useCallback((ev: FormEvent<HTMLInputElement>) => {
@@ -95,8 +93,9 @@ function SelectBoxView({
     nameRef.current = name
     valueRef.current = value
     requiredRef.current = required
+    patternRef.current = pattern,
     messageOnErrorRef.current = messageOnError
-  }, [name, value, required, messageOnError])
+  }, [name, value, required, pattern, messageOnError])
   
   useEffect(() => {
   }, [value])
@@ -107,6 +106,7 @@ function SelectBoxView({
         const errorMsg = validate(
           valueRef.current,
           requiredRef.current,
+          patternRef.current,
           messageOnErrorRef.current
         )
 
@@ -130,29 +130,24 @@ function SelectBoxView({
 
   return (
     <FormControl label={label} error={error}>
-      <Select
-        searchable={false}
-        disabled={disabled}
-        value={value ? [{ key: value }]: []}
-        onChange={(ev: any) => setValue(ev.value[0] && ev.value[0].key)}
-        options={options}
-        labelKey="key"
-        valueKey="text"
-        size={size}
-      />
+      <Input disabled={disabled} name={name} size={size} onChange={onInput}/>
     </FormControl>
   )
 }
 
 // --- misc ----------------------------------------------------------
 
-function validate(value:null | string, required: boolean, messageOnError?: string) {
+function validate(value: string, required: boolean, pattern?: RegExp, messageOnError?: string) {
   let ret: string | null = null
 
   if (required && !value) {
     ret = messageOnError
       ? messageOnError
-      : 'This is a required field' // TODO
+      : 'This is a required field'
+  } else if (value && pattern && !pattern.test(value)) {
+    ret = messageOnError
+      ? messageOnError
+      : 'Please enter a valid value'
   }
 
   return ret
@@ -160,4 +155,4 @@ function validate(value:null | string, required: boolean, messageOnError?: strin
 
 // --- exports -------------------------------------------------------
 
-export default SelectBox 
+export default TextField 

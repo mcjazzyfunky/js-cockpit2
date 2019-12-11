@@ -1,7 +1,7 @@
 // external imports
 import React, { FormEvent } from 'react'
 import { component, isNode } from 'js-react-utils'
-import { Input } from 'baseui/input'
+import { Checkbox } from 'baseui/checkbox'
 import { FormControl } from 'baseui/form-control'
 import * as Spec from 'js-spec/validators'
 
@@ -9,50 +9,47 @@ import * as Spec from 'js-spec/validators'
 import defineStyles from '../tools/defineStyles'
 import useFormCtrl from '../hooks/useFormCtrl'
 
-// derived imports
-const { useCallback, useEffect, useRef, useState } = React
+// derived import
+const { useCallback, useEffect, useState, useRef } = React
 
 // --- components ----------------------------------------------------
 
-const PasswordInput = component<PasswordInputProps>({
-  displayName: 'PasswordInput',
+const CheckBox = component<CheckBoxProps>({
+  displayName: 'CheckBox',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validatePasswordInputProps) }
+    ? { validate: Spec.lazy(() => validateCheckBoxProps) }
     : null,
  
-  render: PasswordInputView
+  render: CheckBoxView
 })
 
 // --- types ---------------------------------------------------------
 
-type PasswordInputProps = {
+type CheckBoxProps = {
   name?: string,
   label?: string,
-  disabled?: boolean,
   required?: boolean,
-  size?: 'compact' | 'default' | 'large'
-  pattern?: RegExp,
+  disabled?: boolean,
+  size?: 'compact' | 'default' | 'large',
   messageOnError?: string
 }
 
 // --- validation ----------------------------------------------------
 
-const validatePasswordInputProps = Spec.checkProps({
+const validateCheckBoxProps = Spec.checkProps({
   optional: {
     name: Spec.string,
     label: Spec.string,
     disabled: Spec.boolean,
     required: Spec.boolean,
-    size: Spec.oneOf('compact', 'default', 'large'),
-    pattern: Spec.instanceOf(RegExp),
     messageOnError: Spec.string
   }
 })
 
 // --- styles --------------------------------------------------------
 
-const usePasswordInputStyles = defineStyles(theme => {
+const useCheckBoxStyles = defineStyles(theme => {
   return {
     root: {
     },
@@ -61,28 +58,25 @@ const usePasswordInputStyles = defineStyles(theme => {
 
 // --- view ----------------------------------------------------------
 
-function PasswordInputView({
+function CheckBoxView({
   name,
   label,
   disabled,
   required = false,
-  size = 'default',
-  pattern,
   messageOnError
-}: PasswordInputProps) {
+}: CheckBoxProps) {
   const
-    [value, setValue] = useState(),
+    [value, setValue] = useState(false),
     [error, setError] = useState(''),
-    classes = usePasswordInputStyles(),
+    classes = useCheckBoxStyles(),
     formCtrl = useFormCtrl(),
     nameRef = useRef(name),
     valueRef = useRef(value),
     requiredRef = useRef(required),
-    patternRef = useRef(pattern),
     messageOnErrorRef = useRef(messageOnError),
 
     onInput = useCallback((ev: FormEvent<HTMLInputElement>) => {
-      setValue(ev.currentTarget.value)
+      setValue(ev.currentTarget.checked)
 
       if (error) {
         setError('')
@@ -93,9 +87,8 @@ function PasswordInputView({
     nameRef.current = name
     valueRef.current = value
     requiredRef.current = required
-    patternRef.current = pattern,
     messageOnErrorRef.current = messageOnError
-  }, [name, value, required, pattern, messageOnError])
+  }, [name, value, required, messageOnError])
   
   useEffect(() => {
   }, [value])
@@ -106,7 +99,6 @@ function PasswordInputView({
         const errorMsg = validate(
           valueRef.current,
           requiredRef.current,
-          patternRef.current,
           messageOnErrorRef.current
         )
 
@@ -129,31 +121,28 @@ function PasswordInputView({
   }, [formCtrl])
 
   return (
-    <FormControl label={label} error={error}>
-      <Input type="password" disabled={disabled} name={name} size={size} onChange={onInput}/>
+    <FormControl error={error}>
+      <Checkbox checked={value} disabled={disabled} name={name} onChange={onInput}>
+        {label}
+      </Checkbox>
     </FormControl>
   )
 }
 
 // --- misc ----------------------------------------------------------
 
-function validate(value: string, required: boolean, pattern?: RegExp, messageOnError?: string) {
+function validate(value: boolean, required: boolean, messageOnError?: string) {
   let ret: string | null = null
 
   if (required && !value) {
     ret = messageOnError
       ? messageOnError
-      : 'This is a required field'
-  } else if (value && pattern && !pattern.test(value)) {
-    ret = messageOnError
-      ? messageOnError
-      : 'Please enter a valid value'
+      : 'This is a required field' // TODO
   }
 
   return ret
 }
 
-
 // --- exports -------------------------------------------------------
 
-export default PasswordInput 
+export default CheckBox 

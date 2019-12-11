@@ -1,6 +1,7 @@
 // components
 export { default as App } from './components/App'
 export { default as Brand } from './components/Brand'
+export { default as CheckBox} from './components/CheckBox'
 export { default as CheckGroup } from './components/CheckGroup'
 export { default as Cockpit } from './components/Cockpit'
 export { default as DataExplorer } from './components/DataExplorer'
@@ -9,11 +10,11 @@ export { default as WorkspaceSelector } from './components/WorkspaceSelector'
 export { default as LoginScreen } from './components/LoginScreen'
 export { default as LogoutButton } from './components/LogoutButton'
 export { default as OptionGroup } from './components/OptionGroup'
-export { default as PasswordInput } from './components/PasswordInput'
+export { default as PasswordField } from './components/PasswordField'
 export { default as SelectBox } from './components/SelectBox'
 export { default as SideNav } from './components/SideNav'
 export { default as Text } from './components/Text'
-export { default as TextInput } from './components/TextInput'
+export { default as TextField } from './components/TextField'
 export { default as UserMenu } from './components/UserMenu'
 
 // hoks

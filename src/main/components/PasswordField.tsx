@@ -9,36 +9,36 @@ import * as Spec from 'js-spec/validators'
 import defineStyles from '../tools/defineStyles'
 import useFormCtrl from '../hooks/useFormCtrl'
 
-// derived import
-const { useCallback, useEffect, useState, useRef } = React
+// derived imports
+const { useCallback, useEffect, useRef, useState } = React
 
 // --- components ----------------------------------------------------
 
-const TextInput = component<TextInputProps>({
-  displayName: 'TextInput',
+const PasswordField = component<PasswordFieldProps>({
+  displayName: 'PasswordField',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validateTextInputProps) }
+    ? { validate: Spec.lazy(() => validatePasswordFieldProps) }
     : null,
  
-  render: TextInputView
+  render: PasswordFieldView
 })
 
 // --- types ---------------------------------------------------------
 
-type TextInputProps = {
+type PasswordFieldProps = {
   name?: string,
   label?: string,
-  required?: boolean,
   disabled?: boolean,
-  size?: 'compact' | 'default' | 'large',
+  required?: boolean,
+  size?: 'compact' | 'default' | 'large'
   pattern?: RegExp,
   messageOnError?: string
 }
 
 // --- validation ----------------------------------------------------
 
-const validateTextInputProps = Spec.checkProps({
+const validatePasswordFieldProps = Spec.checkProps({
   optional: {
     name: Spec.string,
     label: Spec.string,
@@ -52,7 +52,7 @@ const validateTextInputProps = Spec.checkProps({
 
 // --- styles --------------------------------------------------------
 
-const useTextInputStyles = defineStyles(theme => {
+const usePasswordFieldStyles = defineStyles(theme => {
   return {
     root: {
     },
@@ -61,7 +61,7 @@ const useTextInputStyles = defineStyles(theme => {
 
 // --- view ----------------------------------------------------------
 
-function TextInputView({
+function PasswordFieldView({
   name,
   label,
   disabled,
@@ -69,11 +69,11 @@ function TextInputView({
   size = 'default',
   pattern,
   messageOnError
-}: TextInputProps) {
+}: PasswordFieldProps) {
   const
-    [value, setValue] = useState(),
+    [value, setValue] = useState(''),
     [error, setError] = useState(''),
-    classes = useTextInputStyles(),
+    classes = usePasswordFieldStyles(),
     formCtrl = useFormCtrl(),
     nameRef = useRef(name),
     valueRef = useRef(value),
@@ -130,7 +130,7 @@ function TextInputView({
 
   return (
     <FormControl label={label} error={error}>
-      <Input disabled={disabled} name={name} size={size} onChange={onInput}/>
+      <Input type="password" disabled={disabled} name={name} size={size} onChange={onInput}/>
     </FormControl>
   )
 }
@@ -153,6 +153,7 @@ function validate(value: string, required: boolean, pattern?: RegExp, messageOnE
   return ret
 }
 
+
 // --- exports -------------------------------------------------------
 
-export default TextInput 
+export default PasswordField 

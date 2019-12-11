@@ -50,8 +50,8 @@ const useDataFormStyles = defineStyles(theme => {
     title: {
       padding: '12px 20px',
       ...theme.typography.font200,
-      fontWeight: 200,
-      fontSize: '24px'
+      fontWeight: 400,
+      fontSize: '20px'
     },
 
     body: {

@@ -12,6 +12,7 @@ import FormCtrlCtx from '../context/FormCtrlCtx'
 import TextField from './TextField'
 import PasswordField from './PasswordField'
 import CheckBox from './CheckBox'
+import DefaultSizeCtx from '../context/DefaultSizeCtx'
 
 // derived imports
 const { useCallback, useState } = React
@@ -190,39 +191,41 @@ function LoginScreenView({
 
   return (
     <div className={classes.root}>
-      <div className={classes.topSpacer}/>
-      {renderHeader(slotHeader, classes)}
-      <div className={classes.body}>
-        <div className={classes.column1}>
-          <div className={classes.column1Top}>
-            {
-              slotLoginIntro
-                ? slotLoginIntro
-                : renderDefaultLoginIntro(classes)
-            }
-          </div>
-          <div className={classes.column1Bottom}>
-            <LoginIcon size="70"/>
-          </div>
-        </div>
-
-        <form className={classes.column2} onSubmit={onSubmit}>
-          <FormCtrlCtx.Provider value={formCtrl}>
-            <div className={classes.column2Top}>
+      <DefaultSizeCtx.Provider value="compact">
+        <div className={classes.topSpacer}/>
+        {renderHeader(slotHeader, classes)}
+        <div className={classes.body}>
+          <div className={classes.column1}>
+            <div className={classes.column1Top}>
               {
-                slotLoginFields
-                  ? slotLoginFields
-                  : renderDefaultLoginFields(classes)
+                slotLoginIntro
+                  ? slotLoginIntro
+                  : renderDefaultLoginIntro(classes)
               }
             </div>
-            <div className={classes.column2Bottom}>
-              {renderLoginActions(classes)}
+            <div className={classes.column1Bottom}>
+              <LoginIcon size="70"/>
             </div>
-          </FormCtrlCtx.Provider>
-        </form>
-      </div>
-      {renderFooter(slotFooter, classes)}
-      <div className={classes.bottomSpacer}/>
+          </div>
+
+          <form className={classes.column2} onSubmit={onSubmit}>
+            <FormCtrlCtx.Provider value={formCtrl}>
+              <div className={classes.column2Top}>
+                {
+                  slotLoginFields
+                    ? slotLoginFields
+                    : renderDefaultLoginFields(classes)
+                }
+              </div>
+              <div className={classes.column2Bottom}>
+                {renderLoginActions(classes)}
+              </div>
+            </FormCtrlCtx.Provider>
+          </form>
+        </div>
+        {renderFooter(slotFooter, classes)}
+        <div className={classes.bottomSpacer}/>
+      </DefaultSizeCtx.Provider>
     </div>
   )
 }
@@ -273,14 +276,13 @@ function renderDefaultLoginFields(classes: Classes) {
         name="username"
         label="Username"
         required
-        size="compact"
         messageOnError="Please enter a username"
       />
 
       <PasswordField
         name="password"
         label="Password"
-        required size="compact"
+        required
         messageOnError="Please enter a password"
       />
     </>

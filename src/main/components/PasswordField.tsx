@@ -8,6 +8,7 @@ import * as Spec from 'js-spec/validators'
 // internal import
 import defineStyles from '../tools/defineStyles'
 import useFormCtrl from '../hooks/useFormCtrl'
+import useDefaultSize from '../hooks/useDefaultSize'
 
 // derived imports
 const { useCallback, useEffect, useRef, useState } = React
@@ -66,7 +67,7 @@ function PasswordFieldView({
   label,
   disabled,
   required = false,
-  size = 'default',
+  size,
   pattern,
   messageOnError
 }: PasswordFieldProps) {
@@ -74,6 +75,7 @@ function PasswordFieldView({
     [value, setValue] = useState(''),
     [error, setError] = useState(''),
     classes = usePasswordFieldStyles(),
+    defaultSize = useDefaultSize(),
     formCtrl = useFormCtrl(),
     nameRef = useRef(name),
     valueRef = useRef(value),
@@ -130,7 +132,7 @@ function PasswordFieldView({
 
   return (
     <FormControl label={label} error={error}>
-      <Input type="password" disabled={disabled} name={name} size={size} onChange={onInput}/>
+      <Input type="password" disabled={disabled} name={name} size={size || defaultSize} onChange={onInput}/>
     </FormControl>
   )
 }

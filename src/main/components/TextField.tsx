@@ -8,6 +8,7 @@ import * as Spec from 'js-spec/validators'
 // internal import
 import defineStyles from '../tools/defineStyles'
 import useFormCtrl from '../hooks/useFormCtrl'
+import useDefaultSize from '../hooks/useDefaultSize'
 
 // derived import
 const { useCallback, useEffect, useState, useRef } = React
@@ -66,7 +67,7 @@ function TextFieldView({
   label,
   disabled,
   required = false,
-  size = 'default',
+  size,
   pattern,
   messageOnError
 }: TextFieldProps) {
@@ -74,6 +75,7 @@ function TextFieldView({
     [value, setValue] = useState(''),
     [error, setError] = useState(''),
     classes = useTextFieldStyles(),
+    defaultSize = useDefaultSize(),
     formCtrl = useFormCtrl(),
     nameRef = useRef(name),
     valueRef = useRef(value),
@@ -130,7 +132,7 @@ function TextFieldView({
 
   return (
     <FormControl label={label} error={error}>
-      <Input disabled={disabled} name={name} size={size} onChange={onInput}/>
+      <Input disabled={disabled} name={name} size={size || defaultSize} onChange={onInput}/>
     </FormControl>
   )
 }

@@ -2,6 +2,7 @@
 import React, { FormEvent } from 'react'
 import { component, isNode } from 'js-react-utils'
 import { Datepicker } from 'baseui/datepicker'
+import { AiOutlineCalendar as CalendarIcon } from 'react-icons/ai'
 import * as Spec from 'js-spec/validators'
 
 // internal import
@@ -55,6 +56,23 @@ const useDateFieldStyles = defineStyles(theme => {
   return {
     root: {
     },
+
+    dateInputWrapper: {
+      paddingRight: '34px',
+    },
+
+    container: {
+      position: 'relative'
+    },
+
+    calendarIcon: {
+      position: 'absolute',
+      width: '20px',
+      height: '20px',
+      right: '10px',
+      top: '6px',
+      cursor: 'pointer'
+    }
   }
 })
 
@@ -124,10 +142,26 @@ function DateFieldView({
     }
   }, [formCtrl])
 
+  const overrides: any = { // TODO
+    InputWrapper: {
+      props: {
+        className: classes.dateInputWrapper
+      }
+    }
+  }
+
   return (
     <div className={classes.root}>
       <FieldWrapper label={label} required={required} error={error}>
-        <Datepicker disabled={disabled} size={size || defaultSize} onChange={onChange}/>
+        <div className={classes.container}>
+          <Datepicker
+            disabled={disabled}
+            size={size || defaultSize}
+            onChange={onChange}
+            overrides={overrides}
+          />
+          <CalendarIcon className={classes.calendarIcon}/>
+        </div>
       </FieldWrapper> 
     </div>
   )

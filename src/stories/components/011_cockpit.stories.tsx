@@ -1,6 +1,6 @@
 import React from 'react'
 import { App, WorkspaceSelector, Brand, Cockpit,
-  DataExplorer, DataForm, Fieldset, LogoutButton,
+  DataExplorer, DataForm, DateField, Fieldset, LogoutButton,
   TabBox, TabPage, TextField,
   SelectBox, SideNav, UserMenu } from '../js-cockpit'
 
@@ -174,6 +174,7 @@ const dataForm =
                 { key: 'DE', text: 'Germany'}
               ]}
             />
+            <DateField name="dayOfBirth" label="Day of Birth" required/>
           </Fieldset>
         </TabPage>
         <TabPage title="Documents">

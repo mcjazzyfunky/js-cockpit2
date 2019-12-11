@@ -1,7 +1,7 @@
 import React from 'react'
-import { App, WorkspaceSelector, Brand, Cockpit,
+import { App, WorkspaceSelector, Brand, CheckBoxGroup, Cockpit,
   DataExplorer, DataForm, DateField, Fieldset, LogoutButton,
-  TabBox, TabPage, TextField,
+  RadioButtonGroup, TabBox, TabPage, TextField,
   SelectBox, SideNav, UserMenu } from '../js-cockpit'
 
 export default {
@@ -161,6 +161,11 @@ const dataForm =
       <TabBox>
         <TabPage title="Customer data">
           <Fieldset title="Primary contact">
+            <RadioButtonGroup
+               name="salutation"
+               label="Salutation"
+               required
+             />
             <TextField name="firstName" label="First name" required/>
             <TextField name="lastName" label="Last name" required/>
             <TextField name="street" label="Street" required/>
@@ -175,6 +180,10 @@ const dataForm =
               ]}
             />
             <DateField name="dayOfBirth" label="Day of Birth" required/>
+
+            <CheckBoxGroup
+              label="Options"
+            />
           </Fieldset>
         </TabPage>
         <TabPage title="Documents">

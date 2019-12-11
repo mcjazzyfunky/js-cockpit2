@@ -73,7 +73,7 @@ const useFieldWrapperStyles = defineStyles(
       fontSize: '15px',
       marginLeft: '3px',
       bottom: '1px',
-      color: theme.colors.warning
+      color: theme.colors.warning400
     },
 
     field: {

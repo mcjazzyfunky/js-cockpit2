@@ -269,7 +269,7 @@ function renderDefaultLoginIntro(classes: Classes) {
 function renderDefaultLoginFields(classes: Classes) {
   return (
     <>
-      <TextInput name="username" label="Username" required size="compact" pattern={/aaaa/}/>
+      <TextInput name="username" label="Username" required size="compact"/>
       <PasswordInput name="password" label="Password" required size="compact"/>
     </>
   )

@@ -25,7 +25,7 @@ export default function createFormCtrl(): FormCtrl {
         }
       })
 
-      console.log(1111, invalid, data)
+      console.log(1111, !invalid, data)
     }
 
   return {

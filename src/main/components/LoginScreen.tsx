@@ -269,8 +269,20 @@ function renderDefaultLoginIntro(classes: Classes) {
 function renderDefaultLoginFields(classes: Classes) {
   return (
     <>
-      <TextField name="username" label="Username" required size="compact"/>
-      <PasswordField name="password" label="Password" required size="compact"/>
+      <TextField
+        name="username"
+        label="Username"
+        required
+        size="compact"
+        messageOnError="Please enter a username"
+      />
+
+      <PasswordField
+        name="password"
+        label="Password"
+        required size="compact"
+        messageOnError="Please enter a password"
+      />
     </>
   )
 }

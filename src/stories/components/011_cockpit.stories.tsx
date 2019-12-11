@@ -1,5 +1,8 @@
 import React from 'react'
-import { App, WorkspaceSelector, Brand, Cockpit, DataExplorer, LogoutButton, SideNav, UserMenu } from '../js-cockpit'
+import { App, WorkspaceSelector, Brand, Cockpit,
+  DataExplorer, DataForm, Fieldset, LogoutButton,
+  TextField,
+  SideNav, UserMenu } from '../js-cockpit'
 
 export default {
   title: 'Cockpit'
@@ -139,7 +142,7 @@ export const cockpit = () =>
         />
       }
       slotCenter={
-        dataExplorer
+        mainContent
       }
     />
   </App>
@@ -148,3 +151,13 @@ const dataExplorer =
   <DataExplorer
     title="Back-office users"
   />
+
+const dataForm = 
+  <DataForm title="Products">
+    <Fieldset title="Adress data">
+      <TextField name="firstName" label="First name"/>
+      <TextField name="lastName" label="Last name"/>
+    </Fieldset>
+  </DataForm>
+
+const mainContent = dataForm

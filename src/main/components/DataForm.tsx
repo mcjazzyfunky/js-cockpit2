@@ -1,11 +1,12 @@
 // external imports
 import React, { ReactNode } from 'react'
 import { component, isNode } from 'js-react-utils'
-import { FiLayers as DefaultLogo } from 'react-icons/fi'
 import * as Spec from 'js-spec/validators'
 
 // internal import
 import defineStyles from '../tools/defineStyles'
+import LabelPosition from '../enums/LabelPosition'
+import DefaultLabelPositionCtx from '../context/DefaultLabelPositionCtx'
 
 // --- components ----------------------------------------------------
 
@@ -30,6 +31,8 @@ type DataFormProps = {
 
 const validateDataFormProps = Spec.checkProps({
   optional: {
+    title: Spec.string,
+    children: isNode
   }
 })
 
@@ -70,14 +73,16 @@ function DataFormView({
 
   return (
     <div className={classes.root}>
-      <div className={classes.header}>
-        <div className={classes.title}>
-            {title}
+      <DefaultLabelPositionCtx.Provider value={LabelPosition.Beside}>
+        <div className={classes.header}>
+          <div className={classes.title}>
+              {title}
+          </div>
         </div>
-      </div>
-      <div className={classes.body}>
-        {children}
-      </div>
+        <div className={classes.body}>
+          {children}
+        </div>
+      </DefaultLabelPositionCtx.Provider>
     </div>
   )
 }

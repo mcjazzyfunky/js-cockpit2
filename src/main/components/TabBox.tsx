@@ -1,7 +1,7 @@
 // external imports
 import React, { ReactNode } from 'react'
 import { component, isNode, isElementOfType, withChildren } from 'js-react-utils'
-import { Tabs, Tab } from 'baseui/tabs'
+import { StatefulTabs as Tabs, Tab } from 'baseui/tabs'
 import * as Spec from 'js-spec/validators'
 
 // internal import
@@ -52,19 +52,21 @@ function TabBoxView({
   children
 }: TabBoxProps) {
   const classes = useTabBoxStyles()
-console.log(111, children)
-  const pages =
-    Children.map(children, (page: any, idx) => {
-      const key = String(idx)
+    
+  // Children.map would modify keys
+  const pages: ReactNode[] = []
 
-      return <Tab title={page.props.title} key={key}>
+  Children.forEach(children, (page: any, idx) => {
+    pages.push(
+      <Tab title={page.props.title} key={idx}>
         {page.props.children}
       </Tab>
-    })
+    )
+  })
 
   return (
-    <Tabs activeKey="0">
-      {...pages}
+    <Tabs>
+      {pages}
     </Tabs>
   )
 }

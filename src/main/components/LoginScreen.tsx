@@ -13,6 +13,7 @@ import TextField from './TextField'
 import PasswordField from './PasswordField'
 import CheckBox from './CheckBox'
 import DefaultSizeCtx from '../context/DefaultSizeCtx'
+import Size from '../enums/Size'
 
 // derived imports
 const { useCallback, useState } = React
@@ -191,7 +192,7 @@ function LoginScreenView({
 
   return (
     <div className={classes.root}>
-      <DefaultSizeCtx.Provider value="compact">
+      <DefaultSizeCtx.Provider value={Size.Compact}>
         <div className={classes.topSpacer}/>
         {renderHeader(slotHeader, classes)}
         <div className={classes.body}>

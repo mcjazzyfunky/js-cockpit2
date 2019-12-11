@@ -2,11 +2,11 @@
 import React, { FormEvent } from 'react'
 import { component, isNode } from 'js-react-utils'
 import { Select } from 'baseui/select'
-import { FormControl } from 'baseui/form-control'
 import * as Spec from 'js-spec/validators'
 
 // internal import
 import defineStyles from '../tools/defineStyles'
+import FieldWrapper from './FieldWrapper'
 import useFormCtrl from '../hooks/useFormCtrl'
 
 // derived import
@@ -129,7 +129,7 @@ function SelectBoxView({
   }, [formCtrl])
 
   return (
-    <FormControl label={label} error={error}>
+    <FieldWrapper label={label} required={required} error={error}>
       <Select
         searchable={false}
         disabled={disabled}
@@ -140,7 +140,7 @@ function SelectBoxView({
         valueKey="text"
         size={size}
       />
-    </FormControl>
+    </FieldWrapper>
   )
 }
 

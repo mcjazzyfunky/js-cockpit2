@@ -7,6 +7,7 @@ import { ThemeProvider, DarkThemeMove as DarkTheme } from 'baseui'
 // internal import
 import defineStyles from '../tools/defineStyles'
 import DefaultSizeCtx from '../context/DefaultSizeCtx'
+import Size from '../enums/Size'
 
 // --- components ----------------------------------------------------
 
@@ -158,7 +159,7 @@ function renderHeader(
       : <div className={classes.actions}>{slotActions}</div>
 
   return (
-    <DefaultSizeCtx.Provider value="compact">
+    <DefaultSizeCtx.Provider value={Size.Compact}>
       <div className={classes.header}>
         {col1}{col2}{col3}
       </div>
@@ -194,7 +195,7 @@ function renderBody(slotSidebar: ReactNode, slotCenter: ReactNode, classes: Clas
 
   return (
     <div className={classes.body}>
-      <DefaultSizeCtx.Provider value="compact">
+      <DefaultSizeCtx.Provider value={Size.Compact}>
         {col1}
         {col2}
       </DefaultSizeCtx.Provider>

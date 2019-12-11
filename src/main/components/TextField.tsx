@@ -2,11 +2,11 @@
 import React, { FormEvent } from 'react'
 import { component, isNode } from 'js-react-utils'
 import { Input } from 'baseui/input'
-import { FormControl } from 'baseui/form-control'
 import * as Spec from 'js-spec/validators'
 
 // internal import
 import defineStyles from '../tools/defineStyles'
+import FieldWrapper from './FieldWrapper'
 import useFormCtrl from '../hooks/useFormCtrl'
 import useDefaultSize from '../hooks/useDefaultSize'
 
@@ -74,8 +74,8 @@ function TextFieldView({
   const
     [value, setValue] = useState(''),
     [error, setError] = useState(''),
-    classes = useTextFieldStyles(),
     defaultSize = useDefaultSize(),
+    classes = useTextFieldStyles(),
     formCtrl = useFormCtrl(),
     nameRef = useRef(name),
     valueRef = useRef(value),
@@ -131,9 +131,11 @@ function TextFieldView({
   }, [formCtrl])
 
   return (
-    <FormControl label={label} error={error}>
-      <Input disabled={disabled} name={name} size={size || defaultSize} onChange={onInput}/>
-    </FormControl>
+    <div className={classes.root}>
+      <FieldWrapper label={label} required={required} error={error}>
+        <Input disabled={disabled} name={name} size={size || defaultSize} onChange={onInput}/>
+      </FieldWrapper> 
+    </div>
   )
 }
 

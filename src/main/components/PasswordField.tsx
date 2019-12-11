@@ -2,11 +2,11 @@
 import React, { FormEvent } from 'react'
 import { component, isNode } from 'js-react-utils'
 import { Input } from 'baseui/input'
-import { FormControl } from 'baseui/form-control'
 import * as Spec from 'js-spec/validators'
 
 // internal import
 import defineStyles from '../tools/defineStyles'
+import FieldWrapper from './FieldWrapper'
 import useFormCtrl from '../hooks/useFormCtrl'
 import useDefaultSize from '../hooks/useDefaultSize'
 
@@ -131,9 +131,9 @@ function PasswordFieldView({
   }, [formCtrl])
 
   return (
-    <FormControl label={label} error={error}>
+    <FieldWrapper label={label} required={required} error={error}>
       <Input type="password" disabled={disabled} name={name} size={size || defaultSize} onChange={onInput}/>
-    </FormControl>
+    </FieldWrapper>
   )
 }
 

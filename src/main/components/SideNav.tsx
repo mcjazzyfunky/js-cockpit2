@@ -1,6 +1,6 @@
 
 // external imports
-import React from 'react'
+import React, { Key } from 'react'
 import { component } from 'js-react-utils'
 import * as Spec from 'js-spec/validators'
 import { Accordion, Panel } from 'baseui/accordion'
@@ -187,8 +187,8 @@ function SideNavView({
     <div className={classes.root}>
       <ul className={classes.itemList}>
         {
-          groups.map(group => {
-            return renderSideNavGroup(group, 0, activeItemId, classes)
+          groups.map((group, idx) => {
+            return renderSideNavGroup(group, 0, activeItemId, idx, classes)
           })
         }
       </ul>
@@ -200,6 +200,7 @@ function renderSideNavGroup(
   group: SideNavGroupLevel0,
   level: number,
   activeItemId: string | undefined | null,
+  key: Key,
   classes: Classes
 ){
   const classTitle = classNames(
@@ -209,16 +210,16 @@ function renderSideNavGroup(
       : classes.groupTitleLevel1)
   
   return (
-    <li>
+    <li key={key}>
       <div className={classTitle}>
         {group.title}
       </div>
       <ul className={classes.itemList}>
         {
-          group.items.map(it => {
+          group.items.map((it, idx) => {
             return it.type === 'item'
-              ? renderSideNavItem(it, level, activeItemId, classes)
-              : renderSideNavGroup(it, level + 1, activeItemId, classes)
+              ? renderSideNavItem(it, level, activeItemId, idx, classes)
+              : renderSideNavGroup(it, level + 1, activeItemId, idx, classes)
           })
         }
       </ul>
@@ -230,6 +231,7 @@ function renderSideNavItem(
   item: SideNavItem,
   level: number,
   activeItemId: string | null | undefined,
+  key: Key,
   classes: Classes
 ) {
   const className = classNames(
@@ -244,7 +246,7 @@ function renderSideNavItem(
         : classes.itemInactive)
 
   return (
-    <li className={className}>
+    <li className={className} key={key}>
       <a>{item.title}</a>
     </li>
   )

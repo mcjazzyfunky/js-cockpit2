@@ -1,5 +1,5 @@
 // external imports
-import React, { ReactNode } from 'react'
+import React, { ReactNode, Key } from 'react'
 import { component, isNode } from 'js-react-utils'
 import { FiLayers as DefaultLogo } from 'react-icons/fi'
 import * as Spec from 'js-spec/validators'
@@ -117,8 +117,8 @@ function WorkspaceSelectorView({
         <WorkspaceSelectorIcon/>
       </div>
       {
-        menu.items.map(item =>
-          renderWorkspaceLink(item, menu.activeItemId, classes))
+        menu.items.map((item, idx) =>
+          renderWorkspaceLink(item, menu.activeItemId, classes, idx))
       }
     </div>
   )
@@ -127,7 +127,8 @@ function WorkspaceSelectorView({
 function renderWorkspaceLink(
   item: WorkspaceSelectorItem,
   activeItemId: string | undefined,
-  classes: Classes
+  classes: Classes,
+  key: Key
 ) {
   const
     active = typeof activeItemId === 'string' && item.itemId === activeItemId,
@@ -137,7 +138,7 @@ function renderWorkspaceLink(
       active ? classes.workspaceLinkActive :  classes.workspaceLinkInactive)
 
   return (
-    <a className={className}>
+    <a className={className} key={key}>
       {item.text}
     </a>
   )

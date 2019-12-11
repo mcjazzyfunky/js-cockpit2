@@ -2,14 +2,15 @@ import React from 'react'
 import { App, WorkspaceSelector, Brand, Cockpit,
   DataExplorer, DataForm, Fieldset, LogoutButton,
   TabBox, TabPage, TextField,
-  SideNav, UserMenu } from '../js-cockpit'
+  SelectBox, SideNav, UserMenu } from '../js-cockpit'
 
 export default {
   title: 'Cockpit'
 }
 
-export const cockpit = () => 
+export const cockpit = () =>
   <App>
+    <div>
     <Cockpit
       slotBrand={<Brand vendor="meet&amp;greet" title="Back Office" size="small" multicolor={true}/>}
 
@@ -145,6 +146,7 @@ export const cockpit = () =>
         mainContent
       }
     />
+    </div>
   </App>
 
 const dataExplorer =
@@ -157,11 +159,30 @@ const dataForm =
     <Fieldset title="Adress data">
       <TextField name="productId" label="Product no."/>
       <TabBox>
-        <TabPage title="Page-1">
-          This is page 1
+        <TabPage title="Customer data">
+          <Fieldset title="Primary contact">
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+            
+            <SelectBox
+              name="country"
+              label="Country" 
+              options={[
+                { key: 'FR', text: 'France'},
+                { key: 'DE', text: 'Germany'}
+              ]}
+            />
+          </Fieldset>
         </TabPage>
-        <TabPage title="Page-2">
-          This is page 2
+        <TabPage title="Documents">
+        </TabPage>
+        <TabPage title="Images">
+        </TabPage>
+        <TabPage title="Setting">
+        </TabPage>
+        <TabPage title="Permission">
         </TabPage>
       </TabBox>
     </Fieldset>

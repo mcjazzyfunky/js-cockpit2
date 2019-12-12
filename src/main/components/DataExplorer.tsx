@@ -109,21 +109,39 @@ const useDataExplorerStyles = defineStyles(theme => {
     },
 
     paginator: {
-      display: 'flex'
+      display: 'flex',
+      alignItems: 'center'
+    },
+
+    pageInputContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      margin: '0 10px',
+      ...theme.typography.font200,
+      fontWeight: 600
     },
 
     pageInput: {
-      width: '4rem'
+      width: '4em',
+      margin: '0 10px'
     },
 
     pageButton: {
-      width: '35px',
+      display: 'table-cell',
+      width: '28px',
+      height: '20px',
+      padding: '10px 0',
+      textAlign: 'center',
       background: 'none',
       outline: 'none',
       border: 'none',
       
       ':hover': {
+        backgroundColor: theme.colors.buttonTertiaryHover
+      },
 
+      ':active': {
+        backgroundColor: theme.colors.buttonTertiaryActive
       }
     },
 
@@ -223,56 +241,62 @@ function Paginator({
   disabled: boolean,
   classes: DataExplorerClasses
 }) {
-  const buttonOverrides = {
-    BaseButton: {
-      props: {
-        className: classes.pageButton
-      }
-    }
-  }
-
   return (
     <div className={classes.paginator}>
-      <button className={classes.pageButton}>
+      <a className={classes.pageButton}>
+        <svg width="20px" height="20px" viewBox="0 0 64 64">
+          <g>
+            <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="32.936,48.936 
+              15.936,31.936 32.936,14.936"/>
+          </g>
+          <g>
+            <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="47.936,48.936 
+              30.936,31.936 47.936,14.936"/>
+          </g>
+        </svg>
+      </a>
+
+      <a className={classes.pageButton}>
         <svg width="20px" height="20px" viewBox="0 0 64 64">
           <g>
             <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="37,15 20,32 
               37,49"/>
           </g>
         </svg>
-      </button>
-      <Button overrides={buttonOverrides} kind={KIND.tertiary} size={SIZE.compact}>
-        <svg width="20px" height="20px" viewBox="0 0 64 64">
-          <g>
-            <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="37,15 20,32 37,49"/>
-          </g>
-        </svg>
-      </Button>
+      </a>
+      
+      <div className={classes.pageInputContainer}>
+        <div>Page</div>
+        <Input
+          size={SIZE.compact}
+          value={"1"}
+          disabled={disabled}
 
-      <Input
-        size={SIZE.compact}
-        rows={3}
-        value={"1"}
-        disabled={disabled}
+          overrides={{
+            Root: {
+              props: {
+                className: classes.pageInput
+              }
+            },
 
-        overrides={{
-          Input: {
-            props: {
-              className: classes.pageInput
+            Input: {
+              props: {
+                xxxclassName: classes.pageInput
+              }
             }
-          }
-        }}
-      />
-
-      <Button overrides={buttonOverrides} kind={KIND.tertiary} size={SIZE.compact}>
+          }}
+        />
+        <div>of 125</div>
+      </div>
+      <a className={classes.pageButton}>
         <svg width="20px" height="20px" viewBox="0 0 64 64">
           <g>
             <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="27,15 44,32 
               27,49"/>
           </g>
         </svg>
-      </Button>
-      <Button overrides={buttonOverrides} kind={KIND.tertiary} size={SIZE.compact}>
+      </a>
+      <a className={classes.pageButton}>
         <svg width="20px" height="20px" viewBox="0 0 64 64">
           <g>
             <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="31,15 48,32 
@@ -283,7 +307,7 @@ function Paginator({
               16,49"/>
           </g>
         </svg>
-      </Button>
+      </a>
     </div>
   )
 }

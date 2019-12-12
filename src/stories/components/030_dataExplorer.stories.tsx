@@ -8,7 +8,7 @@ export default {
 export const dataExplorer = () => (
   <App>
     <DataExplorer
-
+      title="Contacts"
     />
   </App>
 )

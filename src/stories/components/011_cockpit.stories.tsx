@@ -198,4 +198,4 @@ const dataForm =
     </Fieldset>
   </DataForm>
 
-const mainContent = dataForm
+const mainContent = dataExplorer

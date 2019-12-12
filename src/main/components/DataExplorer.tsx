@@ -9,18 +9,12 @@ import { FiEdit as EditIcon } from 'react-icons/fi'
 import { FiTrash as DeleteIcon } from 'react-icons/fi'
 import { MdFileDownload as DownloadIcon } from 'react-icons/md'
 
-import {
-  StyledTable,
-  StyledHeadCell,
-  StyledBodyCell,
-} from 'baseui/table-grid'
-
 // internal imports
 import defineStyles from '../tools/defineStyles'
+import DataTable from './DataTable'
 import Paginator from './Paginator'
 import PageSizeSelector from './PageSizeSelector'
 import PaginationInfo from './PaginationInfo'
-import Text from './Text'
 
 // derived imports
 const { useCallback, useEffect, useState } = React
@@ -59,10 +53,12 @@ const validateDataExplorerProps = Spec.checkProps({
 const useDataExplorerStyles = defineStyles(theme => {
   return {
     root: {
+      position: 'absolute',
       display: 'flex',
       flexDirection: 'column',
-      height: '300px',
-      margin: '2px',
+      width: '100%',
+      height: '100%',
+      padding: '2px',
       boxSizing: 'border-box'
     },
 
@@ -98,10 +94,6 @@ const useDataExplorerStyles = defineStyles(theme => {
     },
 
     actionButtons: {
-    },
-
-    dataTable: {
-  
     }
   }
 })
@@ -144,7 +136,7 @@ function renderHeader(
 function renderBody(classes: DataExplorerClasses) {
   return (
     <div className={classes.body}>
-      <DataTable classes={classes}/>
+      <DataTable/>
     </div>
   ) 
 }
@@ -168,24 +160,6 @@ function renderFooter(classes: DataExplorerClasses) {
   ) 
 }
 
-function DataTable({
-  classes
-}: {
-  classes: DataExplorerClasses
-}) {
-  return (
-    <div className={classes.dataTable}>
-      <StyledTable $gridTemplateColumns="max-content auto auto auto">
-        <StyledHeadCell $sticky={false}>Task</StyledHeadCell>
-        <StyledHeadCell $sticky={false}>Status</StyledHeadCell>
-        <StyledHeadCell $sticky={false}>Last Run</StyledHeadCell>
-        <StyledHeadCell $sticky={false}>Details</StyledHeadCell>
-      </StyledTable>
-    </div>
-  )
-}
-
 // --- exports -------------------------------------------------------
 
 export default DataExplorer
-

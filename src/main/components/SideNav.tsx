@@ -105,12 +105,13 @@ type SideNavItem = {
 const useSideNavStyles = defineStyles(theme => {
   return {
     root: {
-      minHeight: '100%',
+      height: '100%',
       padding: '10px 0 10px 1px',
       borderWidth: '0 .5px 0 0',
       borderStyle: 'solid',
       borderColor: theme.borders.border400.borderColor,
-      margin: '0'
+      margin: '0',
+      boxSizing: 'border-box'
     },
 
     groupTitle: {

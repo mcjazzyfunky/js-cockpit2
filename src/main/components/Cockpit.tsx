@@ -98,11 +98,14 @@ const useCockpitStyles = defineStyles(theme => {
     },
 
     sidebar: {
+      position: 'relative',
       backgroundColor: '#f8f8f8',
-      width: '250px'
+      width: '250px',
+      overflow: 'auto'
     },
 
     center: {
+      position: 'relative',
       flexGrow: 1,
       backgroundColor: 'white'
     }

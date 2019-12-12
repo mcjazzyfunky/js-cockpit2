@@ -78,6 +78,11 @@ const useFieldWrapperStyles = defineStyles(
 
     field: {
       flexGrow: 1
+    },
+
+    error: {
+      padding: '3px 0',
+      color: theme.colors.warning
     }
   }
 })
@@ -107,7 +112,7 @@ function FieldWrapperView({
       </div>
       <div className={classes.field}>
         {Children.only(children)}
-        <div>
+        <div className={classes.error}>
           {error}
         </div>
       </div>

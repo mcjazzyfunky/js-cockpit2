@@ -133,6 +133,7 @@ function SelectBoxView({
       <Select
         searchable={false}
         disabled={disabled}
+        error={!!error}
         value={value ? [{ key: value }]: []}
         onChange={(ev: any) => setValue(ev.value[0] && ev.value[0].key)}
         options={options}

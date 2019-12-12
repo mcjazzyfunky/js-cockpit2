@@ -132,7 +132,7 @@ function PasswordFieldView({
 
   return (
     <FieldWrapper label={label} required={required} error={error}>
-      <Input type="password" disabled={disabled} name={name} size={size || defaultSize} onChange={onInput}/>
+      <Input type="password" disabled={disabled} name={name} error={!!error} size={size || defaultSize} onChange={onInput}/>
     </FieldWrapper>
   )
 }

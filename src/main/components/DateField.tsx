@@ -156,6 +156,7 @@ function DateFieldView({
         <div className={classes.container}>
           <Datepicker
             disabled={disabled}
+            error={!!error}
             size={size || defaultSize}
             onChange={onChange}
             overrides={overrides}

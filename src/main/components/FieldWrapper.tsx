@@ -53,13 +53,14 @@ const useFieldWrapperStyles = defineStyles(
       display: labelAbove ? 'flex' : 'table-row',
       flexDirection: labelAbove ? 'column' : 'row',
       alignItems: labelAbove ? 'stretch' : 'center',
-      margin: '3px 0'
+      margin: '3px 0',
     },
 
     label: {
       display: labelAbove ? 'block' : 'table-cell',
       ...theme.typography.font250,
       textAlign: labelAbove ? 'inherit' : 'right',
+      whiteSpace: labelAbove ? 'normal' : 'nowrap',
       padding: labelAbove ? '0 0 5px 0' : '0 0.8em 0 0.9em'
     },
 
@@ -74,7 +75,7 @@ const useFieldWrapperStyles = defineStyles(
 
     field: {
       display: labelAbove ? 'block' : 'table-cell',
-      flexGrow: 1
+      //minWidth: '400px' // TODO
     },
 
     error: {

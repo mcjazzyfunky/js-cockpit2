@@ -179,52 +179,77 @@ const dataForm =
     </Fieldset>
     <TabBox>
       <TabPage title="Customer data">
-        <Fieldset title="Primary contact">
-          <RadioButtonGroup
-              name="salutation"
-              label="Salutation"
-              required
+        <div>
+          <Fieldset title="Primary contact">
+            <RadioButtonGroup
+                name="salutation"
+                label="Salutation"
+                required
+              />
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+            
+            <SelectBox
+              name="country"
+              label="Country" 
+              options={[
+                { key: 'FR', text: 'France'},
+                { key: 'DE', text: 'Germany'}
+              ]}
             />
-          <TextField name="firstName" label="First name" required/>
-          <TextField name="lastName" label="Last name" required/>
-          <TextField name="street" label="Street" required/>
-          <TextField name="city" label="City" required/>
-          
-          <SelectBox
-            name="country"
-            label="Country" 
-            options={[
-              { key: 'FR', text: 'France'},
-              { key: 'DE', text: 'Germany'}
-            ]}
-          />
-          <DateField name="dayOfBirth" label="Day of Birth" required/>
+            <DateField name="dayOfBirth" label="Day of Birth" required/>
 
-          <CheckBoxGroup
-            label="Options"
-          />
-        </Fieldset>
-        <Fieldset title="Primary contact">
-          <RadioButtonGroup
-              name="salutation"
-              label="Salutation"
-              required
+            <CheckBoxGroup
+              label="Options"
             />
-          <TextField name="firstName" label="First name" required/>
-          <TextField name="lastName" label="Last name" required/>
-          <TextField name="street" label="Street" required/>
-          <TextField name="city" label="City" required/>
-          
-          <SelectBox
-            name="country"
-            label="Country" 
-            options={[
-              { key: 'FR', text: 'France'},
-              { key: 'DE', text: 'Germany'}
-            ]}
-          />
-          <DateField name="dayOfBirth" label="Day of Birth" required/>
-        </Fieldset>
+          </Fieldset>
+          <Fieldset title="Secondary contact">
+            <RadioButtonGroup
+                name="salutation"
+                label="Salutation"
+                required
+              />
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+            
+            <SelectBox
+              name="country"
+              label="Country" 
+              options={[
+                { key: 'FR', text: 'France'},
+                { key: 'DE', text: 'Germany'}
+              ]}
+            />
+            <DateField name="dayOfBirth" label="Day of Birth" required/>
+          </Fieldset>
+        </div>
+        <div>
+          <Fieldset title="Secondary contact">
+            <RadioButtonGroup
+                name="salutation"
+                label="Salutation"
+                required
+              />
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+            
+            <SelectBox
+              name="country"
+              label="Country" 
+              options={[
+                { key: 'FR', text: 'France'},
+                { key: 'DE', text: 'Germany'}
+              ]}
+            />
+            <DateField name="dayOfBirth" label="Day of Birth" required/>
+          </Fieldset>
+        </div>
       </TabPage>
       <TabPage title="Documents">
       </TabPage>
@@ -237,4 +262,4 @@ const dataForm =
     </TabBox>
   </DataForm>
 
-const mainContent = dataForm
+const mainContent = dataExplorer

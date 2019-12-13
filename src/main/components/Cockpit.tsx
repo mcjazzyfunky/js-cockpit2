@@ -56,6 +56,7 @@ const useCockpitStyles = defineStyles(theme => {
     root: {
       display: 'flex',
       flexDirection: 'column',
+      flexWrap: 'nowrap',
       position: 'absolute',
       width: '100%',
       height: '100%',
@@ -66,8 +67,8 @@ const useCockpitStyles = defineStyles(theme => {
 
     header: {
       display: 'flex',
+      flexWrap: 'nowrap',
       alignItems: 'center',
-      //backgroundColor: theme.colors.headerNavigationFill,
       backgroundColor: '#484848',
       color: theme.colors.white,
       minHeight: '48px'
@@ -75,12 +76,14 @@ const useCockpitStyles = defineStyles(theme => {
 
     brand: {
       display: 'flex',
+      flexWrap: 'nowrap',
       marginRight: '40px',
       marginTop: '-4px' // TODO!!!
     },
 
     topNav: {
       display: 'flex',
+      flexWrap: 'nowrap',
       flexGrow: 1
     },
 

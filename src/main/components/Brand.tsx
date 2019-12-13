@@ -47,6 +47,7 @@ const useBrandStyles = defineStyles(theme => {
   return {
     root: {
       display: 'flex',
+      whiteSpace: 'nowrap',
       alignItems: 'center',
       fontSize: '18px',
       //color: theme.colors.backgroundInv

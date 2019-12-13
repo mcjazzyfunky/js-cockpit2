@@ -67,6 +67,7 @@ const validateWorkspaceSelectorItem = Spec.exact({
 const useWorkspaceSelectorStyles = defineStyles(theme => {
   return {
     root: {
+      whiteSpace: 'nowrap'
     },
 
     menuIcon: {

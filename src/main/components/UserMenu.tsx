@@ -53,6 +53,7 @@ const useUserMenuStyles = defineStyles(theme => {
   return {
     root: {
       display: 'flex',
+      whiteSpace: 'nowrap',
       padding: '.2rem .5rem',
       alignItems: 'center'
     },

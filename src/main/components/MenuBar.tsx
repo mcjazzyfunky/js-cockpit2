@@ -64,6 +64,9 @@ const useMenuBarStyles = defineExtStyles(theme => {
       position: 'relative',
       width: '100%',
       backgroundColor: theme.colors.mono500,
+      borderWidth: '0 0 .5px 0',
+      borderColor: theme.colors.mono600,
+      borderStyle: 'solid',
       
       selectors: {
         '& *': {
@@ -82,7 +85,7 @@ const useMenuBarStyles = defineExtStyles(theme => {
         },
 
         '& .ms-Icon': {
-          color: theme.colors.primary + ' !important'
+        //  color: theme.colors.primary + ' !important'
         }
       }
     },

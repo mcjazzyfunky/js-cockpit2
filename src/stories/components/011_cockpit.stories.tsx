@@ -1,7 +1,7 @@
 import React from 'react'
 import { App, WorkspaceSelector, Brand, CheckBoxGroup, Cockpit,
   DataExplorer, DataForm, DateField, Fieldset, FilterBox, LogoutButton,
-  RadioButtonGroup, TabBox, TabPage, TextField,
+  MenuBar, RadioButtonGroup, TabBox, TabPage, TextField,
   SelectBox, SideNav, UserMenu
 } from '../js-cockpit'
 
@@ -30,7 +30,87 @@ export const cockpit = () =>
         />
       }
 
-      slotActions={ <><UserMenu displayName="Jane Doe"/><LogoutButton/></>}
+      slotActions={
+        <><UserMenu displayName="Jane Doe"/><LogoutButton/></>
+      }
+
+      slotMenu={
+        <MenuBar
+          items={[
+            {
+              id: '1',
+              type: 'menu',
+              text: 'Menu-1',
+
+              items: [
+                {
+                  id: '1-1',
+                  type: 'item',
+                  text: 'Item-1-1',
+                }, {
+                  id: '1-2',
+                  type: 'item',
+                  text: 'Item-1-2',
+                }, {
+                  id: '1-3',
+                  type: 'item',
+                  text: 'Item-1-2',
+                },
+                {
+                  type: 'divider',
+                }, {
+                  id: '1-4',
+                  type: 'item',
+                  text: 'Item-1-2',
+                }, {
+                  id: '1-5',
+                  type: 'item',
+                  text: 'Item-1-2',
+                },
+              ]
+            },
+            {
+              id: '2',
+              type: 'menu',
+              text: 'Menu-2',
+
+              items: [
+                {
+                  id: '2-1',
+                  type: 'item',
+                  text: 'Item-2-1',
+                }, {
+                  id: '2-2',
+                  type: 'item',
+                  text: 'Item-2-2',
+                }, {
+                  id: '2-3',
+                  type: 'item',
+                  text: 'Item-2-3',
+                },
+                {
+                  type: 'divider',
+                }, {
+                  id: '2-4',
+                  type: 'item',
+                  text: 'Item-2-4',
+                }, {
+                  id: '2-5',
+                  type: 'item',
+                  text: 'Item-1-2',
+                },
+              ]
+            }, {
+              type: 'menu',
+              id: '233',
+              text: 'Menu-3',
+              items: []
+            }
+          ]}
+        />
+      }
+
+
       slotSidebar={
         <SideNav
           menu={{

@@ -82,17 +82,17 @@ const useDataExplorerStyles = defineStyles(theme => {
       display: 'flex',
       flexFlow: 'row nowrap',
       alignItems: 'center',
-      padding: '3px 5px',
+      padding: '3px 5px 0 5px',
       borderStyle: 'solid',
       borderColor: theme.borders.border400.borderColor,
       borderWidth: `${theme.borders.border400.borderWidth} 0 0 0`,
     },
 
     title: {
-      ...theme.typography.font550,
+      ...theme.typography.font400,
       fontWeight: 400,
       padding: '3px 4px',
-      margin: '0 28px 0 0'
+      margin: '0 28px 0 0',
     },
 
     actionButtons: {

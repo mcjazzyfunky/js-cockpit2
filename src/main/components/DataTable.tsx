@@ -138,7 +138,7 @@ const useDataTableStyles = defineStyles(theme => {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: '2px 0 0 10px'
+      padding: '1px 0 0 11px'
     }
   }
 })

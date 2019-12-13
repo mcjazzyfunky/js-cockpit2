@@ -70,11 +70,11 @@ const useMenuBarStyles = defineExtStyles(theme => {
           backgroundColor: 'transparent !important',
           border: 'none !important',
           ...theme.typography.font200,
-          fontFamily: theme.typography.font200.fontFamily + ' !important'
+          fontFamily: theme.typography.font200.fontFamily + ' !important',
         },
 
         '& [role=menubar]': {
-          height: '38px !important'
+          height: '36px !important'
         },
 
         '& .ms-Button-flexContainer:hover': {

@@ -1,6 +1,6 @@
 // external imports
-import React from 'react'
-import { component } from 'js-react-utils'
+import React, { ReactNode } from 'react'
+import { component, isNode } from 'js-react-utils'
 import * as Spec from 'js-spec/validators'
 import { Button, KIND, SIZE } from 'baseui/button'
 
@@ -35,7 +35,8 @@ const DataExplorer = component<DataExplorerProps>({
 // --- types ---------------------------------------------------------
 
 type DataExplorerProps = {
-  title?: string
+  title?: string,
+  slotFiltering?: ReactNode
 }
 
 type DataExplorerClasses = ReturnType<typeof useDataExplorerStyles>
@@ -44,7 +45,8 @@ type DataExplorerClasses = ReturnType<typeof useDataExplorerStyles>
 
 const validateDataExplorerProps = Spec.checkProps({
   optional: {
-    title: Spec.string
+    title: Spec.string,
+    slotFiltering: isNode
   }
 })
 
@@ -94,6 +96,10 @@ const useDataExplorerStyles = defineStyles(theme => {
     },
 
     actionButtons: {
+    },
+
+    filtering: {
+      padding: '0.5em 1em 0.8em 1em',
     }
   }
 })
@@ -101,13 +107,23 @@ const useDataExplorerStyles = defineStyles(theme => {
 // --- views ---------------------------------------------------------
 
 function DataExplorerView({
-  title
+  title,
+  slotFiltering
 }: DataExplorerProps) {
-  const classes = useDataExplorerStyles()
+  const
+    classes = useDataExplorerStyles(),
+    
+    filtering = !slotFiltering
+      ? null
+      : <div className={classes.filtering}>
+          {slotFiltering}
+        </div>
+
 
   return (
     <div className={classes.root}>
       {renderHeader(title, classes)}
+      {filtering}
       {renderBody(classes)}
       {renderFooter(classes)}
     </div>

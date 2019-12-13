@@ -1,8 +1,9 @@
 import React from 'react'
 import { App, WorkspaceSelector, Brand, CheckBoxGroup, Cockpit,
-  DataExplorer, DataForm, DateField, Fieldset, LogoutButton,
+  DataExplorer, DataForm, DateField, Fieldset, FilterBox, LogoutButton,
   RadioButtonGroup, TabBox, TabPage, TextField,
-  SelectBox, SideNav, UserMenu } from '../js-cockpit'
+  SelectBox, SideNav, UserMenu
+} from '../js-cockpit'
 
 export default {
   title: 'Cockpit'
@@ -152,6 +153,19 @@ export const cockpit = () =>
 const dataExplorer =
   <DataExplorer
     title="Back-office users"
+    
+    slotFiltering={
+      <FilterBox>
+       <Fieldset>
+         <TextField name="firstName" label="First name" size="compact"/>
+         <TextField name="lastName" label="Last name" size="compact"/>
+       </Fieldset>
+       <Fieldset>
+         <TextField name="postcode" label="Postcode" size="compact"/>
+         <TextField name="city" label="City" size="compact"/>
+       </Fieldset>
+      </FilterBox>
+    }
   />
 
 const dataForm = 

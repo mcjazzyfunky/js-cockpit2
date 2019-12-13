@@ -111,7 +111,9 @@ const useCockpitStyles = defineStyles(theme => {
     center: {
       position: 'relative',
       flexGrow: 1,
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      margin: '3px', // TODO
+      boxSizing: 'border-box'
     }
   }
 })

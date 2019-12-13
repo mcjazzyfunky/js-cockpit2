@@ -93,6 +93,9 @@ const useDataTableStyles = defineStyles(theme => {
     },
   
     tableHeadCell: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       padding: '5px',
       borderColor: theme.borders.border500.borderColor,
       borderStyle: 'solid',
@@ -127,7 +130,7 @@ const useDataTableStyles = defineStyles(theme => {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: '2px 0 0 8px'
+      padding: '3px 0 0 8px'
     },
 
     rowSelectionCell: {

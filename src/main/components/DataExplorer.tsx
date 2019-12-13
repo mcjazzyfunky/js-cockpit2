@@ -136,7 +136,22 @@ function renderHeader(
 function renderBody(classes: DataExplorerClasses) {
   return (
     <div className={classes.body}>
-      <DataTable/>
+      <DataTable
+        title="Contacts"
+        columns={[
+          {
+            title: 'Column1'
+          },
+          {
+            title: 'Column2'
+          },
+          {
+            title: 'Column3'
+          }
+        ]}
+      
+        data={[]}
+      />
     </div>
   ) 
 }

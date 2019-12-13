@@ -12,58 +12,58 @@ import classNames from '../tools/classNames'
 
 // --- components ----------------------------------------------------
 
-const SideNav = component<SideNavProps>({
-  displayName: 'SideNav',
+const SideMenu = component<SideMenuProps>({
+  displayName: 'SideMenu',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validateSideNavProps) }
+    ? { validate: Spec.lazy(() => validateSideMenuProps) }
     : null,
  
-  render: SideNavView
+  render: SideMenuView
 })
 
 // --- types ---------------------------------------------------------
 
-type SideNavProps = {
-  menu: SideNavGroups
+type SideMenuProps = {
+  menu: SideMenuGroups
 }
 
-type SideNavGroups = {
+type SideMenuGroups = {
   type: 'groups',
-  groups: SideNavGroupLevel0[],
+  groups: SideMenuGroupLevel0[],
   activeItemId?: string | null
 }
 
-type SideNavGroupLevel0 = {
+type SideMenuGroupLevel0 = {
   type: 'group',
   title: string,
-  items: (SideNavGroupLevel1 | SideNavItem)[]
+  items: (SideMenuGroupLevel1 | SideMenuItem)[]
 }
 
-type SideNavGroupLevel1 = {
+type SideMenuGroupLevel1 = {
   type: 'group',
   title: string,
-  items: SideNavItem[]
+  items: SideMenuItem[]
 }
 
-type SideNavItem = {
+type SideMenuItem = {
   type: 'item',
   title: string,
   itemId?: string
 }
 
-type Classes = ReturnType<typeof useSideNavStyles>
+type Classes = ReturnType<typeof useSideMenuStyles>
 
 // --- validation ----------------------------------------------------
 
-const validateSideNavProps = Spec.checkProps({
+const validateSideMenuProps = Spec.checkProps({
   required: {
     menu: Spec.any // TODO
   }
 })
 /*
 
-const validateSideNavGroups = Spec.exact({
+const validateSideMenuGroups = Spec.exact({
   type: Spec.is('groups'),
   group: Spec.arrayOf(
     Spec.and(
@@ -79,22 +79,22 @@ const validateSideNavGroups = Spec.exact({
     )
   )
 })
-type SideNavProps = {
-  menu: SideNavGroups
+type SideMenuProps = {
+  menu: SideMenuGroups
 }
 
-type SideNavGroups = {
+type SideMenuGroups = {
   type: 'groups',
-  groups: SideNavGroup
+  groups: SideMenuGroup
 }
 
-type SideNavGroup = {
+type SideMenuGroup = {
   type: 'group',
   title: string,
-  items?: (SideNavGroup | SideNavItem)[]
+  items?: (SideMenuGroup | SideMenuItem)[]
 }
 
-type SideNavItem = {
+type SideMenuItem = {
   type: 'item',
   title: string,
   itemId?: string
@@ -102,7 +102,7 @@ type SideNavItem = {
 */
 // --- styles --------------------------------------------------------
 
-const useSideNavStyles = defineStyles(theme => {
+const useSideMenuStyles = defineStyles(theme => {
   return {
     root: {
       height: '100%',
@@ -175,10 +175,10 @@ const useSideNavStyles = defineStyles(theme => {
 
 // --- view ----------------------------------------------------------
 
-function SideNavView({
+function SideMenuView({
   menu
-}: SideNavProps) {
-  const classes = useSideNavStyles()
+}: SideMenuProps) {
+  const classes = useSideMenuStyles()
 
   const
     activeItemId = menu.activeItemId,
@@ -189,7 +189,7 @@ function SideNavView({
       <ul className={classes.itemList}>
         {
           groups.map((group, idx) => {
-            return renderSideNavGroup(group, 0, activeItemId, idx, classes)
+            return renderSideMenuGroup(group, 0, activeItemId, idx, classes)
           })
         }
       </ul>
@@ -197,8 +197,8 @@ function SideNavView({
   )
 }
 
-function renderSideNavGroup(
-  group: SideNavGroupLevel0,
+function renderSideMenuGroup(
+  group: SideMenuGroupLevel0,
   level: number,
   activeItemId: string | undefined | null,
   key: Key,
@@ -219,8 +219,8 @@ function renderSideNavGroup(
         {
           group.items.map((it, idx) => {
             return it.type === 'item'
-              ? renderSideNavItem(it, level, activeItemId, idx, classes)
-              : renderSideNavGroup(it, level + 1, activeItemId, idx, classes)
+              ? renderSideMenuItem(it, level, activeItemId, idx, classes)
+              : renderSideMenuGroup(it, level + 1, activeItemId, idx, classes)
           })
         }
       </ul>
@@ -228,8 +228,8 @@ function renderSideNavGroup(
   )
 }
 
-function renderSideNavItem(
-  item: SideNavItem,
+function renderSideMenuItem(
+  item: SideMenuItem,
   level: number,
   activeItemId: string | null | undefined,
   key: Key,
@@ -255,4 +255,4 @@ function renderSideNavItem(
 
 // --- exports -------------------------------------------------------
 
-export default SideNav 
+export default SideMenu 

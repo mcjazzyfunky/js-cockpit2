@@ -2,7 +2,7 @@ import React from 'react'
 import { App, WorkspaceSelector, Brand, CheckBoxGroup, Cockpit,
   DataExplorer, DataForm, DateField, Fieldset, FilterBox, LogoutButton,
   MenuBar, RadioButtonGroup, TabBox, TabPage, TextField,
-  SelectBox, SideNav, UserMenu
+  SelectBox, SideMenu, UserMenu
 } from '../js-cockpit'
 
 export default {
@@ -129,7 +129,7 @@ export const cockpit = () =>
 
 
       slotSidebar={
-        <SideNav
+        <SideMenu
           menu={{
             type: 'groups',
             activeItemId: '123',

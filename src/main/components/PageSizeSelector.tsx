@@ -70,7 +70,7 @@ function PaginatorView({
   return (
     <div className={classes.pageSizeSelector}>
       <div className={classes.pageSizeLabel}>
-        <Label3>Page size:</Label3>
+        <Label3>Items/page:</Label3>
       </div>
       <Select
         id="select-id"

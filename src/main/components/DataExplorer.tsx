@@ -138,6 +138,7 @@ function renderBody(classes: DataExplorerClasses) {
     <div className={classes.body}>
       <DataTable
         title="Contacts"
+        rowSelectionMode="multi"
         columns={[
           {
             title: 'Column1',

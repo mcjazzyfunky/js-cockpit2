@@ -5,8 +5,18 @@ import { VariableSizeGrid } from 'react-window'
 import useResizeAware from 'react-resize-aware'
 import * as Spec from 'js-spec/validators'
 
-// internal import
+import { Checkbox } from 'baseui/checkbox'
+
+// internal imports
 import defineStyles from '../tools/defineStyles'
+import classNames from '../tools/classNames'
+
+// derived imports
+const { useState } = React
+
+// --- constants -----------------------------------------------------
+
+const SELECTION_COLUMN_WIDTH = 38
 
 // --- components ----------------------------------------------------
 
@@ -25,9 +35,7 @@ const DataTable = component<DataTableProps>({
 type DataTableProps = {
   title?: string | null,
   
-  rowSelectionOptions?: {
-    mode: 'none' | 'single' | 'multi'
-  } | null,
+  rowSelectionMode?: 'none' | 'single' | 'multi',
 
   sortBy?: string | null,
   sortDir?: 'asc' | 'desc',
@@ -74,6 +82,60 @@ const useDataTableStyles = defineStyles(theme => {
       position: 'absolute',
       width: '100%',
       height: '100%',
+    },
+
+    rowSelectionColumn: {
+    },
+
+    tableHead: {
+      display: 'flex',
+      ...theme.borders.border500,
+    },
+  
+    tableHeadCell: {
+      padding: '5px',
+      borderColor: theme.borders.border500.borderColor,
+      borderStyle: 'solid',
+      borderWidth: '0 0 0 1px',
+      ...theme.typography.font200,
+      fontSize: '14px',
+      fontWeight: 600,
+      borderSizing: 'border-box',
+
+     ':first-child': {
+        borderWidth: 0
+      }
+    },
+
+    tableHeadCellContent: {
+      display: 'flex',
+      flexWrap: 'nowrap'
+    },
+
+    tableBodyCell: {
+      ...theme.typography.font200,
+      padding: '3px 8px',
+      boxSizing: 'border-box'
+    },
+
+    evenRow: {
+      backgroundColor: theme.colors.mono200
+    },
+
+    allRowsSelectionCell: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: '2px 0 0 8px'
+    },
+
+    rowSelectionCell: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: '2px 0 0 10px'
     }
   }
 })
@@ -81,23 +143,53 @@ const useDataTableStyles = defineStyles(theme => {
 // --- view ----------------------------------------------------------
 
 function DataTableView({
-  columns
+  columns,
+  sortBy,
+  sortDir,
+  rowSelectionMode,
+  data,
 }: DataTableProps) {
-  const classes = useDataTableStyles()
-  const [resizeListener, size] = useResizeAware()
+  const
+    classes = useDataTableStyles(),
+    [selectedRows] = useState(() => new Set<any>()), // TODO
+    [resizeListener, size] = useResizeAware(),
+    tableSizeIsKnown = size.width !== null,
 
-  const table = size.width === null
-    ? null
-    : renderTable({
+    columnWidths = tableSizeIsKnown
+       ? calculateColumnWidths(columns, rowSelectionMode !== 'none', size.width)
+       : null,
+
+    changeSelection =() => {}, // TODO,
+    changeSort = () => {}, // TODO,
+
+    tableHead = !tableSizeIsKnown
+      ? null
+      : renderHead(
         columns,
-        width: size.width,
-        height: size.height,
-        classes
-      })
-  
+        sortBy,
+        sortDir,
+        rowSelectionMode,
+        data,
+        selectedRows,
+        columnWidths,
+        classes,
+        changeSelection,
+        changeSort
+      ),
+
+    table = !tableSizeIsKnown
+      ? null
+      : renderTableBody(
+          columns,
+          rowSelectionMode,
+          size.width,
+          size.height,
+          classes
+        )
+
   return (
     <div className={classes.root}>
-      {renderTableHead(columns, false)} 
+      {tableHead}
       <div className={classes.tableContainer}>
         {resizeListener}
         {table}
@@ -106,27 +198,25 @@ function DataTableView({
   )
 }
 
-function renderTable({
-  columns,
-  width,
-  height,
-  classes
-}: {
+function renderTableBody(
   columns: DataTableProps['columns'],
+  rowSelectionMode: DataTableProps['rowSelectionMode'],
   width: number,
   height: number,
   classes: Classes
-}) {
+) {
   const
-    hasSelectorColumn = false, // TODO
+    hasSelectorColumn =
+      rowSelectionMode === 'single' || rowSelectionMode === 'multi', 
+    
     columnWidths = calculateColumnWidths(columns, hasSelectorColumn, width)
 
   return (
     <VariableSizeGrid key={Math.random()}
-      style={{ overflowX: 'hidden'}}
+      
       columnCount={columns.length + Number(hasSelectorColumn)}
-      rowCount={100} // TODO
-      rowHeight={() => 40} // TODO
+      rowCount={1000} // TODO
+      rowHeight={() => 28} // TODO
       width={width}
       height={height}
       columnWidth={idx =>
@@ -135,11 +225,19 @@ function renderTable({
           : columnWidths.dataColumns[idx - Number(hasSelectorColumn)]
       }
     >
-      {({ columnIndex, rowIndex, style }) => (
-        <div style={style}>
-          row {rowIndex}, column {columnIndex}
-        </div>
-      )}
+      {({ columnIndex, rowIndex, style }) => {
+        const className = classNames(
+          classes.tableBodyCell,
+          rowIndex % 2 === 1 ? classes.evenRow : '')
+        
+        return (
+          hasSelectorColumn && columnIndex === 0
+          ? <div style={style} className={classNames(className, classes.rowSelectionCell)}>{renderSelectRowCheckbox()}</div> 
+          : <div style={style} className={className}>
+              row {rowIndex}, column {columnIndex}
+            </div>
+        )
+      }}
     </VariableSizeGrid>
   )
 }
@@ -150,7 +248,7 @@ function calculateColumnWidths(
   totalWidth: number
 ) {
   const
-    selectorColumnWidth = hasSelectorColumn ? 32 : 0,
+    selectorColumnWidth = hasSelectorColumn ? SELECTION_COLUMN_WIDTH : 0,
     columnCount = columns.length,
 
     ret = {
@@ -184,24 +282,132 @@ function calculateColumnWidths(
     return ret
 }
 
-function renderTableHead(
+function renderHead(
   columns: DataTableProps['columns'],
-  hasSelectorColumn: boolean
-) {
+  sortBy: DataTableProps['sortBy'],
+  sortDir: DataTableProps['sortDir'],
+  rowSelectionMode: DataTableProps['rowSelectionMode'],
+  data: DataTableProps['data'],
+  selectedRows: Set<number>,
+  columnWidths: ReturnType<typeof calculateColumnWidths> | null, 
+  classes: Classes,
+  changeSelection: (selection: any) => void,
+  changeSort: (field: string, sortDesc: boolean) => void
+) { // TODO
+  const
+    minWidth = columnWidths
+      ? columnWidths.selectorColumn
+      : SELECTION_COLUMN_WIDTH + 'px',
+
+    selectionColumn =
+      rowSelectionMode !== 'single' && rowSelectionMode !== 'multi'
+        ? null
+        : <div className={classes.rowSelectionColumn} style={{
+            minWidth
+          }}>
+            <div className={classes.allRowsSelectionCell}>
+              {
+                rowSelectionMode === 'multi'
+                  ? renderSelectAllRowsCheckbox(
+                    data, selectedRows, changeSelection, classes)
+                  : null
+              }
+            </div>
+          </div>
+
   return (
-    <table style={{ width: '100%' }}>
-      <thead>
-        <tr>
-          {columns.map(column => {
-            return <th style={{ width: (column.width || 100) + '*'}}>{column.title}</th>
-          })}
-        </tr>
-      </thead>
-    </table>
+    <div className={classes.tableHead}>
+      {selectionColumn}
+      {
+        columns.map((column, columnIdx) =>
+          renderTableHeadCell(
+            columnIdx, columns, sortBy, sortDir,
+            
+            columnWidths
+              ? columnWidths.dataColumns[columnIdx]
+              : 10, // TODO
+              
+            classes, changeSort))
+      }
+    </div>
   )
 }
+
+function renderTableHeadCell(
+  columnIdx: number,
+  columns: DataTableProps['columns'],
+  sortBy: DataTableProps['sortBy'],
+  sortDir: DataTableProps['sortDir'],
+  width: number,
+  classes: Classes,
+  changeSort: (field: string, sortDesc: boolean) => void
+) {
+  const
+    column = columns[columnIdx],
+    sortable = columns[columnIdx].sortable,
+    isSorted = sortBy !== null && sortBy === column.field,
+
+    sortIcon = // TODO
+      <div style={{ width: '20px', height: '20px' }}>
+        {
+          sortable && isSorted
+            ? (sortDir === 'asc' ? '(asc)' : '(desc)') // TODO
+            : null
+        }
+      </div>,
+
+    onClick = 
+      !sortable && column.field
+        ? null
+        : () => {
+          changeSort(column.field!, isSorted ? sortDir !== 'desc' : false)
+        } 
+
+  return (
+    <div
+      key={columnIdx}
+      data-sortable={String(sortable)}
+      onClick={onClick || undefined}
+      style={{ width, minWidth: width, maxWidth: width }}
+      className={classes.tableHeadCell}
+    >
+      <div className={classes.tableHeadCellContent}>
+        {column.title}
+        {sortIcon}
+      </div>
+    </div>
+  )
+}
+
+function renderSelectAllRowsCheckbox(
+  data: DataTableProps['data'],
+  selectedRows: Set<number>,
+  changeRowSelection: (selection: Set<number>) => void,
+  classes: Classes
+) { // TODO
+  const
+    rowSelectionSize = selectedRows.size,
+    checked = rowSelectionSize > 0 && rowSelectionSize === data.length,
+
+    onChange =() => {
+      const selectedRows: Iterable<number> =
+        checked
+          ? []
+          : data.keys()
+
+      changeRowSelection(new Set(selectedRows))
+    }
+
+  return (
+    <Checkbox/> // TODO
+  )
+}
+
+function renderSelectRowCheckbox() {
+  return <Checkbox/>
+}
+
 
 // --- exports -------------------------------------------------------
 
 export default DataTable
-

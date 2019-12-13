@@ -67,6 +67,7 @@ const useDataTableStyles = defineStyles(theme => {
     root: {
       position: 'relative',
       height: '100%',
+      overflow: 'hidden'
     },
 
     tableContainer: {
@@ -96,14 +97,13 @@ function DataTableView({
   
   return (
     <div className={classes.root}>
+      {renderTableHead(columns, false)} 
       <div className={classes.tableContainer}>
         {resizeListener}
         {table}
       </div>
     </div>
   )
-
-  return <div>[DataTable]</div>
 }
 
 function renderTable({
@@ -174,34 +174,31 @@ function calculateColumnWidths(
         realWidth =
           i < columnCount - 1
             ? Math.round((column.width || 100) * realTotal / ratioTotal)
-            : realTotal - sumRealWidths - 0.5 // TODO: why -0.5
+            : realTotal - sumRealWidths - 0.5 // TODO: why -0.5?
 
       sumRealWidths += realWidth
 
       ret.dataColumns.push(realWidth)
     }
-console.log(totalWidth, ret)
+
     return ret
 }
 
-function todo() {
-      <VariableSizeGrid
-        className=""
-        columnCount={5}
-        height={400}
-        rowCount={1220}
-        rowHeight={() => 40}
-        width={800}
-        columnWidth={() => 80}
-      
-      >
-        {({ columnIndex, rowIndex, style }) => (
-          <div style={style}>
-            row {rowIndex}, column {columnIndex}
-          </div>
-        )}
-      </VariableSizeGrid>
-
+function renderTableHead(
+  columns: DataTableProps['columns'],
+  hasSelectorColumn: boolean
+) {
+  return (
+    <table style={{ width: '100%' }}>
+      <thead>
+        <tr>
+          {columns.map(column => {
+            return <th style={{ width: (column.width || 100) + '*'}}>{column.title}</th>
+          })}
+        </tr>
+      </thead>
+    </table>
+  )
 }
 
 // --- exports -------------------------------------------------------

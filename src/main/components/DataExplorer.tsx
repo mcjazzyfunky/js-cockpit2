@@ -140,10 +140,12 @@ function renderBody(classes: DataExplorerClasses) {
         title="Contacts"
         columns={[
           {
-            title: 'Column1'
+            title: 'Column1',
+            width: 50,
           },
           {
-            title: 'Column2'
+            title: 'Column2',
+            width: 200
           },
           {
             title: 'Column3'

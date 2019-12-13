@@ -93,7 +93,7 @@ function PaginatorView({
   return (
     <div className={classes.paginator}>
       <a className={classes.pageButton}>
-        <svg width="20px" height="20px" viewBox="0 0 64 64">
+        <svg width="24px" height="24px" viewBox="0 0 64 64">
           <g>
             <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="32.936,48.936 
               15.936,31.936 32.936,14.936"/>
@@ -106,7 +106,7 @@ function PaginatorView({
       </a>
 
       <a className={classes.pageButton}>
-        <svg width="20px" height="20px" viewBox="0 0 64 64">
+        <svg width="24px" height="24px" viewBox="0 0 64 64">
           <g>
             <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="37,15 20,32 
               37,49"/>
@@ -138,7 +138,7 @@ function PaginatorView({
         <div>of 125</div>
       </div>
       <a className={classes.pageButton}>
-        <svg width="20px" height="20px" viewBox="0 0 64 64">
+        <svg width="24px" height="24px" viewBox="0 0 64 64">
           <g>
             <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="27,15 44,32 
               27,49"/>
@@ -146,7 +146,7 @@ function PaginatorView({
         </svg>
       </a>
       <a className={classes.pageButton}>
-        <svg width="20px" height="20px" viewBox="0 0 64 64">
+        <svg width="24x" height="24px" viewBox="0 0 64 64">
           <g>
             <polyline fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="bevel" strokeMiterlimit="10" points="31,15 48,32 
               31,49"/>

@@ -48,7 +48,7 @@ const useFilterBoxStyles = defineStyles(theme => {
     },
 
     column1: {
-      padding: '.25em 0 .25em 0'
+      padding: '.5em 1.5em .25em 0'
     },
 
     column2: {
@@ -56,13 +56,13 @@ const useFilterBoxStyles = defineStyles(theme => {
     },
 
     column3: {
-      padding: '.25em 0 .25em 5em'
+      padding: '0 0 .25em 5em'
     },
 
     filterIcon: {
       width: '24px',
       height: '24px',
-      opacity: '0.4'
+      opacity: '0.3'
     }
   }
 })

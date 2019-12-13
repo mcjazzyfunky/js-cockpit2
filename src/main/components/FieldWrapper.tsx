@@ -48,23 +48,19 @@ const validateFieldWrapperProps = Spec.checkProps({
 const useFieldWrapperStyles = defineStyles(
   (theme, required: boolean, labelAbove: boolean) => {
   
-  const labelWidth = labelAbove ? '' : '160px' 
-
   return {
     root: {
-      display: 'flex',
+      display: labelAbove ? 'flex' : 'table-row',
       flexDirection: labelAbove ? 'column' : 'row',
       alignItems: labelAbove ? 'stretch' : 'center',
       margin: '3px 0'
     },
 
     label: {
-      width: labelWidth,
-      minWidth: labelWidth,
-      maxWidth: labelWidth,
+      display: labelAbove ? 'block' : 'table-cell',
       ...theme.typography.font250,
       textAlign: labelAbove ? 'inherit' : 'right',
-      margin: labelAbove ? '0 0 5px 0' : '0 0.9em 0 0'
+      padding: labelAbove ? '0 0 5px 0' : '0 0.8em 0 0.9em'
     },
 
     asterisk: {
@@ -77,6 +73,7 @@ const useFieldWrapperStyles = defineStyles(
     },
 
     field: {
+      display: labelAbove ? 'block' : 'table-cell',
       flexGrow: 1
     },
 
@@ -106,7 +103,7 @@ function FieldWrapperView({
       : null
 
   return (
-    <label className={classes.root}>
+    <label data-component="FieldWrapper" className={classes.root}>
       <div className={classes.label}>
         {label}{maybeAsterisk}
       </div>

@@ -121,11 +121,9 @@ function CheckBoxGroupView({
   }, [formCtrl])
 
   return (
-    <div className={classes.root}>
-      <FieldWrapper label={label} required={required} error={error}>
-        <div>[CheckBoxGroup]</div>
-      </FieldWrapper> 
-    </div>
+    <FieldWrapper label={label} required={required} error={error}>
+      <div>[CheckBoxGroup]</div>
+    </FieldWrapper> 
   )
 }
 

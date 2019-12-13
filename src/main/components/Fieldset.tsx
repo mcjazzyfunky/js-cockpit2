@@ -37,12 +37,25 @@ const validateFieldsetProps = Spec.checkProps({
 
 // --- styles --------------------------------------------------------
 
-const useFieldsetStyles = defineStyles(theme => {
+const useFieldsetStyles = defineStyles((theme, hasTitle: boolean) => {
   return {
     root: {
+      display:  'inline-block',
+      ':not(:first-child)': {
+        marginLeft: '2.5em'
+      }
     },
 
     title: {
+      color: theme.colors.primary,
+      fontSize: '14px',
+      fontWeight: 600,
+      padding: '.8em 0 1em 0'
+    },
+
+    content: {
+      display: 'table',
+      marginLeft: hasTitle ? '1em' : ''
     }
   }
 })
@@ -53,14 +66,20 @@ function FieldsetView({
   title,
   children
 }: FieldsetProps) {
-  const classes = useFieldsetStyles()
+  const
+    hasTitle = !!title,
+    classes = useFieldsetStyles(hasTitle),
+
+    titleContent = title
+      ? <div className={`${classes.title}`}>
+          {title}
+        </div>
+      : null
 
   return (
-    <div className={`${classes.root}`}>
-      <div className={`${classes.title}`}>
-        {title}
-      </div>
-      <div>
+    <div data-component="Fieldset" className={`${classes.root}`}>
+      {titleContent}
+      <div className={classes.content}>
         {children}
       </div>
     </div>

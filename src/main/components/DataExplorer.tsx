@@ -140,10 +140,10 @@ function renderHeader(
         {title}
       </div>
       <div className={classes.actionButtons}>
-        <Button size={SIZE.compact} kind="minimal"><NewIcon/> &nbsp; New</Button>
-        <Button size={SIZE.compact} kind="minimal"><EditIcon/> &nbsp; Edit</Button>
-        <Button size={SIZE.compact} kind="minimal"><DeleteIcon/> &nbsp; Delete</Button>
-        <Button size={SIZE.compact} kind="minimal"><DownloadIcon/> &nbsp; Export</Button>
+        <Button size={SIZE.compact} kind="tertiary"><NewIcon/> &nbsp; New</Button>
+        <Button size={SIZE.compact} kind="tertiary"><EditIcon/> &nbsp; Edit</Button>
+        <Button size={SIZE.compact} kind="tertiary"><DeleteIcon/> &nbsp; Delete</Button>
+        <Button size={SIZE.compact} kind="tertiary"><DownloadIcon/> &nbsp; Export</Button>
       </div>
     </div>
   ) 

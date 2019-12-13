@@ -164,52 +164,77 @@ const dataExplorer =
          <TextField name="postcode" label="Postcode" size="compact"/>
          <TextField name="city" label="City" size="compact"/>
        </Fieldset>
+       <Fieldset>
+         <DateField name="dateFrom" label="Date from" size="compact"/>
+         <DateField name="dateTo" label="Date to" size="compact"/>
+       </Fieldset>
       </FilterBox>
     }
   />
 
 const dataForm = 
   <DataForm title="Products">
-    <Fieldset title="Adress data">
+    <Fieldset>
       <TextField name="productId" label="Product no."/>
-      <TabBox>
-        <TabPage title="Customer data">
-          <Fieldset title="Primary contact">
-            <RadioButtonGroup
-               name="salutation"
-               label="Salutation"
-               required
-             />
-            <TextField name="firstName" label="First name" required/>
-            <TextField name="lastName" label="Last name" required/>
-            <TextField name="street" label="Street" required/>
-            <TextField name="city" label="City" required/>
-            
-            <SelectBox
-              name="country"
-              label="Country" 
-              options={[
-                { key: 'FR', text: 'France'},
-                { key: 'DE', text: 'Germany'}
-              ]}
-            />
-            <DateField name="dayOfBirth" label="Day of Birth" required/>
-
-            <CheckBoxGroup
-              label="Options"
-            />
-          </Fieldset>
-        </TabPage>
-        <TabPage title="Documents">
-        </TabPage>
-        <TabPage title="Images">
-        </TabPage>
-        <TabPage title="Setting">
-        </TabPage>
-        <TabPage title="Permission">
-        </TabPage>
-      </TabBox>
     </Fieldset>
+    <TabBox>
+      <TabPage title="Customer data">
+        <Fieldset title="Primary contact">
+          <RadioButtonGroup
+              name="salutation"
+              label="Salutation"
+              required
+            />
+          <TextField name="firstName" label="First name" required/>
+          <TextField name="lastName" label="Last name" required/>
+          <TextField name="street" label="Street" required/>
+          <TextField name="city" label="City" required/>
+          
+          <SelectBox
+            name="country"
+            label="Country" 
+            options={[
+              { key: 'FR', text: 'France'},
+              { key: 'DE', text: 'Germany'}
+            ]}
+          />
+          <DateField name="dayOfBirth" label="Day of Birth" required/>
+
+          <CheckBoxGroup
+            label="Options"
+          />
+        </Fieldset>
+        <Fieldset title="Primary contact">
+          <RadioButtonGroup
+              name="salutation"
+              label="Salutation"
+              required
+            />
+          <TextField name="firstName" label="First name" required/>
+          <TextField name="lastName" label="Last name" required/>
+          <TextField name="street" label="Street" required/>
+          <TextField name="city" label="City" required/>
+          
+          <SelectBox
+            name="country"
+            label="Country" 
+            options={[
+              { key: 'FR', text: 'France'},
+              { key: 'DE', text: 'Germany'}
+            ]}
+          />
+          <DateField name="dayOfBirth" label="Day of Birth" required/>
+        </Fieldset>
+      </TabPage>
+      <TabPage title="Documents">
+      </TabPage>
+      <TabPage title="Images">
+      </TabPage>
+      <TabPage title="Setting">
+      </TabPage>
+      <TabPage title="Permission">
+      </TabPage>
+    </TabBox>
   </DataForm>
 
-const mainContent = dataExplorer
+const mainContent = dataForm

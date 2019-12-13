@@ -151,20 +151,18 @@ function DateFieldView({
   }
 
   return (
-    <div className={classes.root}>
-      <FieldWrapper label={label} required={required} error={error}>
-        <div className={classes.container}>
-          <Datepicker
-            disabled={disabled}
-            error={!!error}
-            size={size || defaultSize}
-            onChange={onChange}
-            overrides={overrides}
-          />
-          <CalendarIcon className={classes.calendarIcon}/>
-        </div>
-      </FieldWrapper> 
-    </div>
+    <FieldWrapper label={label} required={required} error={error}>
+      <div className={classes.container}>
+        <Datepicker
+          disabled={disabled}
+          error={!!error}
+          size={size || defaultSize}
+          onChange={onChange}
+          overrides={overrides}
+        />
+        <CalendarIcon className={classes.calendarIcon}/>
+      </div>
+    </FieldWrapper> 
   )
 }
 

@@ -121,11 +121,9 @@ function RadioButtonGroupView({
   }, [formCtrl])
 
   return (
-    <div className={classes.root}>
-      <FieldWrapper label={label} required={required} error={error}>
-        <div>[RadioButtonGroup]</div>
-      </FieldWrapper> 
-    </div>
+    <FieldWrapper label={label} required={required} error={error}>
+      <div>[RadioButtonGroup]</div>
+    </FieldWrapper> 
   )
 }
 

@@ -102,7 +102,7 @@ const useDataTableStyles = defineStyles(theme => {
       borderWidth: '0 0 0 1px',
       ...theme.typography.font200,
       fontSize: '14px',
-      fontWeight: 600,
+      fontWeight: 500,
       borderSizing: 'border-box',
 
      ':first-child': {

@@ -131,11 +131,9 @@ function TextFieldView({
   }, [formCtrl])
 
   return (
-    <div className={classes.root}>
-      <FieldWrapper label={label} required={required} error={error}>
-        <Input disabled={disabled} error={!!error} name={name} size={size || defaultSize} onChange={onInput}/>
-      </FieldWrapper> 
-    </div>
+    <FieldWrapper label={label} required={required} error={error}>
+      <Input disabled={disabled} error={!!error} name={name} size={size || defaultSize} onChange={onInput}/>
+    </FieldWrapper> 
   )
 }
 

@@ -81,13 +81,17 @@ const useMenuBarStyles = defineExtStyles(theme => {
         },
 
         '& .ms-Button-flexContainer:hover': {
-          backgroundColor: theme.colors.mono600 + ' !important'
+          backgroundColor: theme.colors.mono500 + ' !important'
         },
 
         '& .ms-Icon': {
         //  color: theme.colors.primary + ' !important'
+        },
+
+        '& .ms-ContextualMenu *': {
+          backgroundColor: 'red'
         }
-      }
+      },
     },
 
     inner: {

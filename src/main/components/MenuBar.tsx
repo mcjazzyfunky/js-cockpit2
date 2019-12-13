@@ -63,9 +63,9 @@ const useMenuBarStyles = defineExtStyles(theme => {
     root: {
       position: 'relative',
       width: '100%',
-      backgroundColor: theme.colors.mono500,
+      backgroundColor: theme.colors.mono400,
       borderWidth: '0 0 .5px 0',
-      borderColor: theme.colors.mono600,
+      borderColor: theme.colors.mono500,
       borderStyle: 'solid',
       
       selectors: {

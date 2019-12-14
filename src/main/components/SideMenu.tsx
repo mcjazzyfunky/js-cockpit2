@@ -116,19 +116,19 @@ const useSideMenuStyles = defineStyles(theme => {
 
     groupTitle: {
       textTransform: 'uppercase',
-      ...theme.typography.font300,
+      ...theme.typography.font250,
       fontWeight: 600,
       padding: '0 20px'
     },
     
     groupTitleLevel0: {
-      fontSize: theme.typography.font350.fontSize + ' !important',
+      fontSize: theme.typography.font250.fontSize + ' !important',
       paddingLeft: '20px',
       margin: '5px 0',
     },
     
     groupTitleLevel1: {
-      fontSize: theme.typography.font350.fontSize + ' !important',
+      fontSize: theme.typography.font250.fontSize + ' !important',
       padding: '3px 40px 0 40px',
     },
 
@@ -140,7 +140,7 @@ const useSideMenuStyles = defineStyles(theme => {
     },
 
     item: {
-      ...theme.typography.font300,
+      ...theme.typography.font250,
       fontWeight: 'normal',
     },
     

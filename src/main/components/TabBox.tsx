@@ -52,20 +52,49 @@ function TabBoxView({
   children
 }: TabBoxProps) {
   const classes = useTabBoxStyles()
-    
+
+  const tabsOverrides: any = {
+    TabBar: {
+      style: ({ $theme }: any) => ({
+        //background: 'none',
+        //borderWidth: '0 0 .5px 0',
+        //borderStyle: 'solid',
+        //borderColor: $theme.borders.border300.borderColor
+      })
+    },
+
+    TabContent: {
+      style: {
+        paddingLeft: '8px',
+        paddingRight: '8px',
+      }
+    }
+  }
+
+  const tabOverrides: any = {
+    Tab: {
+      style: ({ $theme }: any) => ({
+        padding: 0,
+        margin: 0,
+        paddingTop: $theme.sizing.scale400,
+        paddingBottom: $theme.sizing.scale400
+      })
+    }
+  }
+
   // Children.map would modify keys
   const pages: ReactNode[] = []
 
   Children.forEach(children, (page: any, idx) => {
     pages.push(
-      <Tab title={page.props.title} key={idx}>
+      <Tab title={page.props.title} key={idx} overrides={tabOverrides}>
         {page.props.children}
       </Tab>
     )
   })
 
   return (
-    <Tabs>
+    <Tabs overrides={tabsOverrides}>
       {pages}
     </Tabs>
   )

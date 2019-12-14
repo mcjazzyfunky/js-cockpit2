@@ -1,6 +1,6 @@
 import React from 'react'
 import { App, WorkspaceSelector, Brand, CheckBoxGroup, Cockpit,
-  DataExplorer, DataForm, DateField, Fieldset, FilterBox, LogoutButton,
+  DataExplorer, DataForm, DateField, FieldSection, Fieldset, FilterBox, LogoutButton,
   MenuBar, RadioButtonGroup, TabBox, TabPage, TextField,
   SelectBox, SideMenu, UserMenu
 } from '../js-cockpit'
@@ -269,6 +269,54 @@ const dataExplorer =
     }
   />
 
+
+const dataForm = 
+  <DataForm title="Products">
+    <TabBox>
+      <TabPage title="Customer data">
+        <FieldSection title="Address">
+          <Fieldset>
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+          </Fieldset>
+            
+          <Fieldset>
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+          </Fieldset>
+        </FieldSection>
+        <FieldSection title="Meta data">
+          <Fieldset>
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+          </Fieldset>
+            
+          <Fieldset>
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+          </Fieldset>
+        </FieldSection>
+      </TabPage>
+      <TabPage title="Documents">
+      </TabPage>
+      <TabPage title="Images">
+      </TabPage>
+      <TabPage title="Setting">
+      </TabPage>
+      <TabPage title="Permission">
+      </TabPage>
+    </TabBox>
+  </DataForm>
+
+/*
 const dataForm = 
   <DataForm title="Products">
     <Fieldset>
@@ -358,5 +406,5 @@ const dataForm =
       </TabPage>
     </TabBox>
   </DataForm>
-
-const mainContent = dataExplorer
+*/
+const mainContent = dataForm

@@ -68,6 +68,7 @@ const validateOption = Spec.exact({
 const useCheckBoxGroupStyles = defineStyles(theme => {
   return {
     root: {
+      paddingTop: '3px'
     },
   }
 })
@@ -140,7 +141,7 @@ function CheckBoxGroupView({
 
   return (
     <FieldWrapper label={label} required={required} error={error}>
-      <>
+      <div className={classes.root}>
       {
         !options ? null : options.map(option => {
           return (
@@ -150,7 +151,7 @@ function CheckBoxGroupView({
           )
         })
       }
-      </>
+      </div>
     </FieldWrapper> 
   )
 }

@@ -53,7 +53,6 @@ const useFieldWrapperStyles = defineStyles(
       display: labelAbove ? 'flex' : 'table-row',
       flexDirection: labelAbove ? 'column' : 'row',
       alignItems: labelAbove ? 'stretch' : 'center',
-      margin: '3px 0',
     },
 
     label: {
@@ -62,7 +61,8 @@ const useFieldWrapperStyles = defineStyles(
       fontWeight: 500,
       textAlign: labelAbove ? 'inherit' : 'right',
       whiteSpace: labelAbove ? 'normal' : 'nowrap',
-      padding: labelAbove ? '0 0 5px 0' : '0 0.8em 0 0.9em'
+      padding: labelAbove ? '0 0 5px 0' : '5px 0.8em 0 0.9em',
+      verticalAlign: labelAbove ? '' : 'top'
     },
 
     asterisk: {

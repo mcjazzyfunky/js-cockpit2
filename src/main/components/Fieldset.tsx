@@ -40,17 +40,16 @@ const validateFieldsetProps = Spec.checkProps({
 const useFieldsetStyles = defineStyles((theme, hasTitle: boolean) => {
   return {
     root: {
-      display:  'inline-block',
-      ':not(:first-child)': {
-        marginLeft: '2.5em'
-      }
+      display: 'inline-block',
+      verticalAlign: 'top',
+      marginRight: '2.5em'
     },
 
     title: {
-      color: theme.colors.primary,
-      fontSize: '14px',
-      fontWeight: 600,
-      padding: '.8em 0 1em 0'
+      color: theme.colors.mono800,
+      fontSize: '13px',
+      fontWeight: 400,
+      padding: '0 0 1em 0'
     },
 
     content: {

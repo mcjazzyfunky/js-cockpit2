@@ -275,7 +275,7 @@ const dataForm =
     <TabBox>
       <TabPage title="Customer data">
         <FormSection title="Address">
-          <Fieldset>
+          <Fieldset title="Primary address">
             <RadioButtonGroup
               name="salutation"
               label="Salutation"
@@ -292,9 +292,30 @@ const dataForm =
             <TextField name="lastName" label="Last name" required/>
             <TextField name="street" label="Street" required/>
             <TextField name="city" label="City" required/>
+            
+            <SelectBox
+              name="country"
+              label="Country"
+              options={[
+                { value: 'US', text: 'USA' },
+                { value: 'FR', text: 'France' }
+              ]}
+            />
+
+            <RadioButtonGroup
+              name="newsletter"
+              label="Newsletter"
+              value="monthly"
+
+              options={[
+                { value: 'weekly', text: 'weekly' },
+                { value: 'monthly', text: 'monthly' },
+                { value: 'never', text: 'never' }
+              ]}
+            />
           </Fieldset>
             
-          <Fieldset>
+          <Fieldset title="Secondary address">
             <TextField name="firstName" label="First name" required/>
             <TextField name="lastName" label="Last name" required/>
             <TextField name="street" label="Street" required/>

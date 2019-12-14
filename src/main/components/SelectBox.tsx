@@ -35,7 +35,7 @@ type SelectBoxProps = {
   messageOnError?: string,
 
   options?: Array<{
-    key: string,
+    value: string,
     text: string
   }>
 }
@@ -137,8 +137,8 @@ function SelectBoxView({
         value={value ? [{ key: value }]: []}
         onChange={(ev: any) => setValue(ev.value[0] && ev.value[0].key)}
         options={options}
-        labelKey="key"
-        valueKey="text"
+        labelKey="text"
+        valueKey="value"
         size={size}
       />
     </FieldWrapper>

@@ -59,6 +59,7 @@ const useFieldWrapperStyles = defineStyles(
     label: {
       display: labelAbove ? 'block' : 'table-cell',
       ...theme.typography.font250,
+      fontWeight: 500,
       textAlign: labelAbove ? 'inherit' : 'right',
       whiteSpace: labelAbove ? 'normal' : 'nowrap',
       padding: labelAbove ? '0 0 5px 0' : '0 0.8em 0 0.9em'

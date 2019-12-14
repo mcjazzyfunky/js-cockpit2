@@ -320,6 +320,19 @@ const dataForm =
             <TextField name="lastName" label="Last name" required/>
             <TextField name="street" label="Street" required/>
             <TextField name="city" label="City" required/>
+
+            <CheckBoxGroup
+              label="Inform about"
+              name="topics"
+
+              options={[
+                { key: 'internalNews', text: 'Internal News' },
+                { key: 'externalNews', text: 'Exernal News' },
+                { key: 'offers', text: 'Offers'},
+                { key: 'changes', text: 'Changes'}
+              ]}
+            />
+
           </Fieldset>
         </FormSection>
         <FormSection title="Meta data">

@@ -4,6 +4,8 @@ import { component, isNode } from 'js-react-utils'
 import { Input } from 'baseui/input'
 import * as Spec from 'js-spec/validators'
 
+import { Checkbox } from 'baseui/checkbox'
+
 // internal import
 import defineStyles from '../tools/defineStyles'
 import FieldWrapper from './FieldWrapper'
@@ -30,9 +32,16 @@ const CheckBoxGroup = component<CheckBoxGroupProps>({
 type CheckBoxGroupProps = {
   name?: string,
   label?: string,
+  value?: string,
+  options?: Option[],
   required?: boolean,
   disabled?: boolean,
   messageOnError?: string
+}
+
+type Option = {
+  key: string,
+  text: string
 }
 
 // --- validation ----------------------------------------------------
@@ -41,10 +50,17 @@ const validateCheckBoxGroupProps = Spec.checkProps({
   optional: {
     name: Spec.string,
     label: Spec.string,
+    value: Spec.string,
+    options: Spec.arrayOf(Spec.lazy(() => validateOption)),
     disabled: Spec.boolean,
     required: Spec.boolean,
     messageOnError: Spec.string
   }
+})
+
+const validateOption = Spec.exact({
+  key: Spec.string,
+  text: Spec.string
 })
 
 // --- styles --------------------------------------------------------
@@ -61,23 +77,25 @@ const useCheckBoxGroupStyles = defineStyles(theme => {
 function CheckBoxGroupView({
   name,
   label,
+  value,
+  options,
   disabled,
   required = false,
   messageOnError
 }: CheckBoxGroupProps) {
   const
-    [value, setValue] = useState(''),
+    [val, setVal] = useState(''),
     [error, setError] = useState(''),
     defaultSize = useDefaultSize(),
     classes = useCheckBoxGroupStyles(),
     formCtrl = useFormCtrl(),
     nameRef = useRef(name),
-    valueRef = useRef(value),
+    valueRef = useRef(val),
     requiredRef = useRef(required),
     messageOnErrorRef = useRef(messageOnError),
 
     onInput = useCallback((ev: FormEvent<HTMLInputElement>) => {
-      setValue(ev.currentTarget.value)
+      setVal(ev.currentTarget.value)
 
       if (error) {
         setError('')
@@ -86,13 +104,13 @@ function CheckBoxGroupView({
 
   useEffect(() => {
     nameRef.current = name
-    valueRef.current = value
+    valueRef.current = val
     requiredRef.current = required
     messageOnErrorRef.current = messageOnError
-  }, [name, value, required,  messageOnError])
+  }, [name, val, required,  messageOnError])
   
   useEffect(() => {
-  }, [value])
+  }, [val])
 
   useEffect(() => {
     if (formCtrl) {
@@ -122,7 +140,17 @@ function CheckBoxGroupView({
 
   return (
     <FieldWrapper label={label} required={required} error={error}>
-      <div>[CheckBoxGroup]</div>
+      <>
+      {
+        !options ? null : options.map(option => {
+          return (
+            <Checkbox>
+              {option.text}
+            </Checkbox>
+          )
+        })
+      }
+      </>
     </FieldWrapper> 
   )
 }

@@ -48,7 +48,7 @@ const useFieldsetStyles = defineStyles((theme, hasTitle: boolean) => {
     title: {
       color: theme.colors.mono800,
       fontSize: '13px',
-      fontWeight: 400,
+      fontWeight: 600,
       padding: '0 0 1em 0'
     },
 

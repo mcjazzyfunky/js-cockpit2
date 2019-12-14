@@ -64,7 +64,7 @@ const useUserMenuStyles = defineStyles(theme => {
     },
 
     displayName: {
-      fontSize: theme.sizing.scale600,
+      ...theme.typography.font300,
       margin: '0 14px 0 10px'
     }
   }

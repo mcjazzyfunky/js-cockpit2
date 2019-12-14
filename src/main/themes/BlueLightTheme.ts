@@ -14,4 +14,8 @@ const myThemePrimitives = {
   primary700: colors.blue700,
 };
 const myTheme = createTheme(myThemePrimitives)
+
+myTheme.sizing.scale200 = '3px'
+myTheme.sizing.scale400 = '6px'
+
 export default myTheme

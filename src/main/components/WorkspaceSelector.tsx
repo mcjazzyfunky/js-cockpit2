@@ -1,12 +1,12 @@
 // external imports
 import React, { ReactNode, Key } from 'react'
 import { component, isNode } from 'js-react-utils'
-import { FiLayers as DefaultLogo } from 'react-icons/fi'
 import * as Spec from 'js-spec/validators'
 
 // internal import
 import classNames from '../tools/classNames'
 import defineStyles from '../tools/defineStyles'
+import { StatefulTooltip, PLACEMENT } from 'baseui/tooltip'
 
 // --- components ----------------------------------------------------
 
@@ -88,7 +88,7 @@ const useWorkspaceSelectorStyles = defineStyles(theme => {
 
       ':hover': {
         backgroundColor: theme.colors.primary300,
-        borderRadius: '1px'
+        borderRadius: '1px',
       }
     },
 
@@ -138,11 +138,16 @@ function renderWorkspaceLink(
       classes.workspaceLink,
       active ? classes.workspaceLinkActive :  classes.workspaceLinkInactive)
 
-  return (
+  const link =
     <a className={className} key={key}>
       {item.text}
     </a>
-  )
+  
+  return item.description
+    ? <StatefulTooltip  onMouseEnterDelay={800} showArrow content={() => item.description} placement={PLACEMENT.bottom}>
+        {link}
+      </StatefulTooltip>
+    : link
 }
 
 function WorkspaceSelectorIcon() {

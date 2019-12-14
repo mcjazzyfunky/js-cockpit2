@@ -1,6 +1,6 @@
 import React from 'react'
 import { App, WorkspaceSelector, Brand, CheckBoxGroup, Cockpit,
-  DataExplorer, DataForm, DateField, FieldSection, Fieldset, FilterBox, LogoutButton,
+  DataExplorer, DataForm, DateField, FormSection, Fieldset, FilterBox, LogoutButton,
   MenuBar, RadioButtonGroup, TabBox, TabPage, TextField,
   SelectBox, SideMenu, UserMenu
 } from '../js-cockpit'
@@ -26,6 +26,81 @@ registerIcons({
   }
 }, { disableWarnings: true})
 
+const menuBar = 
+  <MenuBar
+    items={[
+      {
+        id: '1',
+        type: 'menu',
+        text: 'Menu-1',
+
+        items: [
+          {
+            id: '1-1',
+            type: 'item',
+            text: 'Item-1-1',
+          }, {
+            id: '1-2',
+            type: 'item',
+            text: 'Item-1-2',
+          }, {
+            id: '1-3',
+            type: 'item',
+            text: 'Item-1-2',
+          },
+          {
+            type: 'divider',
+          }, {
+            id: '1-4',
+            type: 'item',
+            text: 'Item-1-2',
+          }, {
+            id: '1-5',
+            type: 'item',
+            text: 'Item-1-2',
+          },
+        ]
+      },
+      {
+        id: '2',
+        type: 'menu',
+        text: 'Menu-2',
+
+        items: [
+          {
+            id: '2-1',
+            type: 'item',
+            text: 'Item-2-1',
+          }, {
+            id: '2-2',
+            type: 'item',
+            text: 'Item-2-2',
+          }, {
+            id: '2-3',
+            type: 'item',
+            text: 'Item-2-3',
+          },
+          {
+            type: 'divider',
+          }, {
+            id: '2-4',
+            type: 'item',
+            text: 'Item-2-4',
+          }, {
+            id: '2-5',
+            type: 'item',
+            text: 'Item-1-2',
+          },
+        ]
+      }, {
+        type: 'menu',
+        id: '233',
+        text: 'Menu-3',
+        items: []
+      }
+    ]}
+  />
+
 export const cockpit = () =>
   <App>
     <div>
@@ -38,10 +113,10 @@ export const cockpit = () =>
             type: 'items',
             activeItemId: '3',
             items: [
-              { type: 'item', itemId: '1', text: 'Dashboard' },
-              { type: 'item', itemId: '2', text: 'User management' },
-              { type: 'item', itemId: '3', text: 'Catalog' },
-              { type: 'item', itemId: '4', text: 'CMS' }
+              { type: 'item', itemId: '1', text: 'Dashboard', description: 'A easy overview of your business' },
+              { type: 'item', itemId: '2', text: 'User management', description: 'Handle user and user groups' },
+              { type: 'item', itemId: '3', text: 'Catalog', description: 'Manage products and categories' },
+              { type: 'item', itemId: '4', text: 'CMS', description: 'Content management system' }
             ]
           }}
         />
@@ -51,82 +126,7 @@ export const cockpit = () =>
         <><UserMenu displayName="Jane Doe"/><LogoutButton/></>
       }
 
-      slotMenu={
-        <MenuBar
-          items={[
-            {
-              id: '1',
-              type: 'menu',
-              text: 'Menu-1',
-
-              items: [
-                {
-                  id: '1-1',
-                  type: 'item',
-                  text: 'Item-1-1',
-                }, {
-                  id: '1-2',
-                  type: 'item',
-                  text: 'Item-1-2',
-                }, {
-                  id: '1-3',
-                  type: 'item',
-                  text: 'Item-1-2',
-                },
-                {
-                  type: 'divider',
-                }, {
-                  id: '1-4',
-                  type: 'item',
-                  text: 'Item-1-2',
-                }, {
-                  id: '1-5',
-                  type: 'item',
-                  text: 'Item-1-2',
-                },
-              ]
-            },
-            {
-              id: '2',
-              type: 'menu',
-              text: 'Menu-2',
-
-              items: [
-                {
-                  id: '2-1',
-                  type: 'item',
-                  text: 'Item-2-1',
-                }, {
-                  id: '2-2',
-                  type: 'item',
-                  text: 'Item-2-2',
-                }, {
-                  id: '2-3',
-                  type: 'item',
-                  text: 'Item-2-3',
-                },
-                {
-                  type: 'divider',
-                }, {
-                  id: '2-4',
-                  type: 'item',
-                  text: 'Item-2-4',
-                }, {
-                  id: '2-5',
-                  type: 'item',
-                  text: 'Item-1-2',
-                },
-              ]
-            }, {
-              type: 'menu',
-              id: '233',
-              text: 'Menu-3',
-              items: []
-            }
-          ]}
-        />
-      }
-
+      //slotMenu={menuBar}
 
       slotSidebar={
         <SideMenu
@@ -274,7 +274,34 @@ const dataForm =
   <DataForm title="Products">
     <TabBox>
       <TabPage title="Customer data">
-        <FieldSection title="Address">
+        <FormSection title="Address">
+          <Fieldset>
+            <RadioButtonGroup
+              name="salutation"
+              label="Salutation"
+              align="horizontal"
+              value="mrs"
+
+              options={[
+                { value: 'mrs', text: 'Mrs' },
+                { value: 'mr', text: 'Mrs' }
+              ]}
+            />
+            
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+          </Fieldset>
+            
+          <Fieldset>
+            <TextField name="firstName" label="First name" required/>
+            <TextField name="lastName" label="Last name" required/>
+            <TextField name="street" label="Street" required/>
+            <TextField name="city" label="City" required/>
+          </Fieldset>
+        </FormSection>
+        <FormSection title="Meta data">
           <Fieldset>
             <TextField name="firstName" label="First name" required/>
             <TextField name="lastName" label="Last name" required/>
@@ -288,24 +315,10 @@ const dataForm =
             <TextField name="street" label="Street" required/>
             <TextField name="city" label="City" required/>
           </Fieldset>
-        </FieldSection>
-        <FieldSection title="Meta data">
-          <Fieldset>
-            <TextField name="firstName" label="First name" required/>
-            <TextField name="lastName" label="Last name" required/>
-            <TextField name="street" label="Street" required/>
-            <TextField name="city" label="City" required/>
-          </Fieldset>
-            
-          <Fieldset>
-            <TextField name="firstName" label="First name" required/>
-            <TextField name="lastName" label="Last name" required/>
-            <TextField name="street" label="Street" required/>
-            <TextField name="city" label="City" required/>
-          </Fieldset>
-        </FieldSection>
+        </FormSection>
       </TabPage>
       <TabPage title="Documents">
+        {dataExplorer}
       </TabPage>
       <TabPage title="Images">
       </TabPage>

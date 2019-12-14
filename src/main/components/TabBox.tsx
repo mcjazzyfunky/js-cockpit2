@@ -94,7 +94,7 @@ function TabBoxView({
   })
 
   return (
-    <Tabs overrides={tabsOverrides}>
+    <Tabs overrides={tabsOverrides} renderAll={true}>
       {pages}
     </Tabs>
   )

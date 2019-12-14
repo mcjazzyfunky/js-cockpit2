@@ -9,26 +9,26 @@ import defineStyles from '../tools/defineStyles'
 
 // --- components ----------------------------------------------------
 
-const FieldSection = component<FieldSectionProps>({
-  displayName: 'FieldSection',
+const FormSection = component<FormSectionProps>({
+  displayName: 'FormSection',
   
   ...process.env.NODE_ENV === 'development' as any
-    ? { validate: Spec.lazy(() => validateFieldSectionProps) }
+    ? { validate: Spec.lazy(() => validateFormSectionProps) }
     : null,
  
-  render: FieldSectionView
+  render: FormSectionView
 })
 
 // --- types ---------------------------------------------------------
 
-type FieldSectionProps = {
+type FormSectionProps = {
   title?: string,
   children?: ReactNode
 }
 
 // --- validation ----------------------------------------------------
 
-const validateFieldSectionProps = Spec.checkProps({
+const validateFormSectionProps = Spec.checkProps({
   optional: {
     title: Spec.string,
     children: isNode
@@ -37,7 +37,7 @@ const validateFieldSectionProps = Spec.checkProps({
 
 // --- styles --------------------------------------------------------
 
-const useFieldSectionStyles = defineStyles((theme, hasTitle: boolean) => {
+const useFormSectionStyles = defineStyles((theme, hasTitle: boolean) => {
   return {
     root: {
     },
@@ -60,13 +60,13 @@ const useFieldSectionStyles = defineStyles((theme, hasTitle: boolean) => {
 
 // --- view ----------------------------------------------------------
 
-function FieldSectionView({
+function FormSectionView({
   title,
   children
-}: FieldSectionProps) {
+}: FormSectionProps) {
   const
     hasTitle = !!title,
-    classes = useFieldSectionStyles(hasTitle),
+    classes = useFormSectionStyles(hasTitle),
 
     titleContent = title
       ? <div className={`${classes.title}`}>
@@ -75,7 +75,7 @@ function FieldSectionView({
       : null
 
   return (
-    <div data-component="FieldSection" className={`${classes.root}`}>
+    <div data-component="FormSection" className={`${classes.root}`}>
       {titleContent}
       <div className={classes.content}>
         {children}
@@ -86,4 +86,4 @@ function FieldSectionView({
 
 // --- exports -------------------------------------------------------
 
-export default FieldSection
+export default FormSection
